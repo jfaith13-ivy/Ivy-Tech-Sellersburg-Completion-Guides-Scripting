@@ -214,8 +214,9 @@ def parse_completion_guide(csv_file):
 
 
 def main():
-
-    input_csv = "completion_guide.csv"
+    # Use the INPUT_CSV_FILE variable from the notebook scope
+    global INPUT_CSV_FILE
+    input_csv = INPUT_CSV_FILE
     output_json = "completion_guide.json"
 
     data = parse_completion_guide(input_csv)
@@ -231,7 +232,6 @@ def main():
     print(
         f"Successfully created {output_json}"
     )
-
 
 if __name__ == "__main__":
     main()
