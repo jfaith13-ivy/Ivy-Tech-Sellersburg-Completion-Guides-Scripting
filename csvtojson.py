@@ -1,10 +1,8 @@
-#!/usr/bin/env python3
-
 import csv
 import json
 import re
 
-INPUT_CSV_FILE = "/content/DUMMY Advanced  Completion Guide Template - Sheet1 (1).csv"
+INPUT_CSV_FILE = "/content/DUMMY Advanced  Completion Guide Template - Sheet1 (5).csv"
 OUTPUT_JSON_FILE = "completion_guide.json"
 
 TERMS = {
@@ -75,6 +73,13 @@ def parse_completion_guide(csv_file):
                 break
 
         if term_found:
+            # Ensure a year has been detected before trying to process a term
+            if current_year is None:
+                # If a term is found but no year has been identified yet,
+                # skip this section to avoid KeyError. This handles cases
+                # where the CSV might have terms before any year indicator.
+                row_index += 1 # Advance to the next row to prevent potential infinite loop
+                continue
 
             current_term = term_found
 
@@ -214,10 +219,10 @@ def parse_completion_guide(csv_file):
 
 
 def main():
-    # Use the INPUT_CSV_FILE variable from the notebook scope
-    global INPUT_CSV_FILE
+
+    # Use the global variables for input and output file paths
     input_csv = INPUT_CSV_FILE
-    output_json = "completion_guide.json"
+    output_json = OUTPUT_JSON_FILE
 
     data = parse_completion_guide(input_csv)
 
@@ -232,6 +237,7 @@ def main():
     print(
         f"Successfully created {output_json}"
     )
+
 
 if __name__ == "__main__":
     main()
