@@ -5,6 +5,9 @@
     --text-color: #006648;
     --header-subtitle-color: #8DC63F;
     --header-text-color: white;
+    --dark-grey: #d1d1d1;
+    --requirement: #EC6A5A;
+    --elective: #FAA21B;
 }
 
 @font-face {
@@ -47,11 +50,10 @@ body {
     width: 100%;
     height: 110px;
     background-color: var(--text-color);
-    display: grid;
-    place-items: center;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
-
+    
     h1 {
         color: var(--header-text-color);
         margin: 0;
@@ -68,33 +70,66 @@ body {
         width: 100%;
         height: 100%;
         gap: 10px;
+        padding: 20px;
 
+        .header-title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .header-logo {
+            color: var(--header-text-color);
+            font-family: "Avenir", sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+        }
+        .course-name {
+            display: inline-block;
+            /* transform: scaleY(1.25); */
+            transform-origin: top left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .rounded-line {
+            width: 4px;
+            height: 28px;
+            background-color: var(--header-text-color);
+            border-radius: 99px;
+        }
     }
-    .header-title {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-    }
-    .header-logo {
-        color: var(--header-text-color);
-        font-family: "Avenir", sans-serif;
-        font-weight: 900;
-        font-size: 2rem;
-    }
-    .course-name {
-        display: inline-block;
-        /* transform: scaleY(1.25); */
-        transform-origin: top left;
+    .icon-legend {
+        background-color: var(--dark-grey);
+        min-height: 24px;
+        max-height: 24px;
         display: flex;
         align-items: center;
-        gap: 10px;
-    }
-    .rounded-line {
-        width: 4px;
-        height: 28px;
-        background-color: var(--header-text-color);
-        border-radius: 99px;
+        justify-content: space-evenly;
+        
+        p {
+            margin: 2px 0 0 0;
+            font-family: "Avenir", sans-serif;
+            font-size: 1em;
+        }
+        .legend-required {
+            color: var(--requirement);
+        }
+        .legend-elective {
+            color: var(--elective);
+        }
+        .legend-general {
+            color: var(--text-color);
+        }
+        .legend-group {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            img {
+                width: 18px;
+            }
+        }
+        
     }
 }
 
