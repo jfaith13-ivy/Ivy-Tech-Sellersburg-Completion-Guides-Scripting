@@ -31,6 +31,7 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
     padding: 20px;
     margin: 0;
     font-family: "Avenir", sans-serif;
@@ -141,39 +142,3 @@ body {
     size: letter;
     margin: 0in;
 }
-
-/* .pagedjs_page {
-    background: var(--paper-color); */
-    /* width: 8.5in; */
-    /* min-width: 8.5in; */
-    /* height: 11in; */
-    /* box-sizing: border-box; */
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    margin-bottom: 20px;
-} */
-
-/* @media screen, pagedjs-ignore {
-    body {
-        background-color: var(--site-bg-color);
-    }
-
-    .pagedjs_pages {
-        width: calc(var(--pagedjs-width) * 2);
-        flex-wrap: wrap;
-        flex: 0;
-        margin: 0 auto;
-        display: flex;
-    }
-
-    .pagedjs_page {
-        background-color: var(--paper-color);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        flex-grow: 0;
-        flex-shrink: 0;
-        margin: 10mm 0 0;
-    }
-
-    .pagedjs_first_page {
-        margin-left: var(--pagedjs-width);
-    }
-} */
