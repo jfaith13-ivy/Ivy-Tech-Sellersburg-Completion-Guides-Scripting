@@ -1,0 +1,144 @@
+:root {
+    /* colors */
+    --site-bg-color: grey;
+    --paper-color: white;
+    --text-color: #006648;
+    --header-subtitle-color: #8DC63F;
+    --header-text-color: white;
+}
+
+@font-face {
+    font-family: "Avenir";
+    src: url("assets/fonts/Avenir Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Avenir";
+    src: url("assets/fonts/Avenir Black`.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    background-color: var(--site-bg-color);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    margin: 0;
+    font-family: "Avenir", sans-serif;
+}
+
+.page {
+    background: var(--paper-color);
+    width: 8.5in;
+    min-width: 8.5in;
+    height: 11in;
+    box-sizing: border-box;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+.page-header {
+    width: 100%;
+    height: 110px;
+    background-color: var(--text-color);
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    h1 {
+        color: var(--header-text-color);
+        margin: 0;
+    }
+    h2 {
+        color: var(--header-subtitle-color);
+        margin: 0;
+        font-size: 1rem;
+    }
+    .title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        gap: 10px;
+
+    }
+    .header-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .header-logo {
+        color: var(--header-text-color);
+        font-family: "Avenir", sans-serif;
+        font-weight: 900;
+        font-size: 2rem;
+    }
+    .course-name {
+        display: inline-block;
+        /* transform: scaleY(1.25); */
+        transform-origin: top left;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .rounded-line {
+        width: 4px;
+        height: 28px;
+        background-color: var(--header-text-color);
+        border-radius: 99px;
+    }
+}
+
+.page-content {
+    padding: 0.25in 0.5in 0.5in 0.5in;
+}
+
+@page {
+    size: letter;
+    margin: 0in;
+}
+
+/* .pagedjs_page {
+    background: var(--paper-color); */
+    /* width: 8.5in; */
+    /* min-width: 8.5in; */
+    /* height: 11in; */
+    /* box-sizing: border-box; */
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+} */
+
+/* @media screen, pagedjs-ignore {
+    body {
+        background-color: var(--site-bg-color);
+    }
+
+    .pagedjs_pages {
+        width: calc(var(--pagedjs-width) * 2);
+        flex-wrap: wrap;
+        flex: 0;
+        margin: 0 auto;
+        display: flex;
+    }
+
+    .pagedjs_page {
+        background-color: var(--paper-color);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        flex-grow: 0;
+        flex-shrink: 0;
+        margin: 10mm 0 0;
+    }
+
+    .pagedjs_first_page {
+        margin-left: var(--pagedjs-width);
+    }
+} */

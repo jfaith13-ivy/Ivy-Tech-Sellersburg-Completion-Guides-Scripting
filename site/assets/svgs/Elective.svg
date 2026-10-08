@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.14 17.3">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f9a21d;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-family: EBGaramond-ExtraBold, 'EB Garamond';
+        font-size: 14.54px;
+        font-variation-settings: 'wght' 800;
+        font-weight: 700;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <circle class="cls-1" cx="6.57" cy="8.94" r="6.57"/>
+  <text class="cls-2" transform="translate(2.27 12.49)"><tspan x="0" y="0">+</tspan></text>
+</svg>
