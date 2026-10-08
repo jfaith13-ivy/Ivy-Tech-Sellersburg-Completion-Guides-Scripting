@@ -12,7 +12,7 @@
 
 @font-face {
     font-family: "Avenir";
-    src: url("assets/fonts/Avenir Medium.woff2") format("woff2");
+    src: url("../assets/fonts/Avenir Medium.woff2") format("woff2");
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -20,7 +20,15 @@
 
 @font-face {
     font-family: "Avenir";
-    src: url("assets/fonts/Avenir Black`.woff2") format("woff2");
+    src: url("../assets/fonts/Avenir Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "D-DIN-Condensed-Bold";
+    src: url("../assets/fonts/D-DIN-Condensed-Bold.woff2") format("woff2");
     font-weight: 900;
     font-style: normal;
     font-display: swap;
@@ -56,12 +64,15 @@ body {
     box-sizing: border-box;
     
     h1 {
+        font-family: "D-DIN-Condensed-Bold", sans-serif;
+        /* font-family: "Avenir"; */
         color: var(--header-text-color);
+        font-size: 28pt;
         margin: 0;
     }
     h2 {
         color: var(--header-subtitle-color);
-        margin: 0;
+        margin: -5px 0;
         font-size: 1rem;
     }
     .title-container {
@@ -87,7 +98,6 @@ body {
         }
         .course-name {
             display: inline-block;
-            /* transform: scaleY(1.25); */
             transform-origin: top left;
             display: flex;
             align-items: center;
@@ -98,6 +108,7 @@ body {
             height: 28px;
             background-color: var(--header-text-color);
             border-radius: 99px;
+            margin-bottom: 4px;
         }
     }
     .icon-legend {
@@ -135,7 +146,18 @@ body {
 }
 
 .page-content {
-    padding: 0.25in 0.5in 0.5in 0.5in;
+    padding: 0 0.25in 0.25in 0.25in;
+
+    .semester-block {
+        .semester-block-header {
+            background-color: var(--text-color);
+            color: var(--header-text-color);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-family: "Avenir", sans-serif;
+            font-weight: 900;
+        }
+    }
 }
 
 @page {
