@@ -2,12 +2,15 @@
     /* colors */
     --site-bg-color: grey;
     --paper-color: white;
-    --text-color: #006648;
-    --header-subtitle-color: #8DC63F;
+    --primary: #006648;
+    --secondary: #8DC63F;
     --header-text-color: white;
-    --dark-grey: #d1d1d1;
     --requirement: #EC6A5A;
     --elective: #FAA21B;
+    --fall-only: #D15D27;
+    --dual-credit: #253959;
+    --dark-grey: #d1d1d1;
+    --light-grey: #ebebeb;
 }
 
 @font-face {
@@ -58,20 +61,19 @@ body {
 .page-header {
     width: 100%;
     height: 110px;
-    background-color: var(--text-color);
+    background-color: var(--primary);
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     
     h1 {
         font-family: "D-DIN-Condensed-Bold", sans-serif;
-        /* font-family: "Avenir"; */
         color: var(--header-text-color);
         font-size: 28pt;
         margin: 0;
     }
     h2 {
-        color: var(--header-subtitle-color);
+        color: var(--secondary);
         margin: -5px 0;
         font-size: 1rem;
     }
@@ -131,17 +133,46 @@ body {
             color: var(--elective);
         }
         .legend-general {
-            color: var(--text-color);
+            color: var(--primary);
         }
         .legend-group {
             display: flex;
             gap: 6px;
             align-items: center;
-            img {
-                width: 18px;
-            }
         }
-        
+    }
+}
+
+.badge {
+    width: 18px;
+}
+
+table {
+    width: calc(100% - 10px);
+    border-collapse: collapse;
+    margin: 0px 5px 20px 5px;
+    box-sizing: border-box;
+
+    .course-name {
+        display: flex;
+        gap: 6px;
+    }
+    .course-number {
+        font-weight: 900;
+    }
+    td {
+        padding: 4px 8px;
+        color: var(--primary);
+        /* display: flex; */
+    }
+    tr:nth-child(even) {
+        background-color: var(--light-grey);
+    }
+    tr:nth-child(odd) {
+        background-color: var(--dark-grey);
+    }
+    p {
+        margin: 0;
     }
 }
 
@@ -150,12 +181,13 @@ body {
 
     .semester-block {
         .semester-block-header {
-            background-color: var(--text-color);
+            background-color: var(--primary);
             color: var(--header-text-color);
             padding: 6px 10px;
             border-radius: 6px;
             font-family: "Avenir", sans-serif;
             font-weight: 900;
+            margin-bottom: 0;
         }
     }
 }
