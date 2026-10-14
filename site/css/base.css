@@ -185,7 +185,6 @@ table {
     margin: 0px 5px 5px 5px;
     box-sizing: border-box;
     table-layout: fixed;
-    /* background-color: var(--dark-grey); */
 
     .course-number {
         font-weight: 900;
