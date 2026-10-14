@@ -257,3 +257,24 @@ table {
     size: letter;
     margin: 0in;
 }
+
+@media print {
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    body {
+        background-color: transparent;
+        padding: 0;
+        display: block;
+    }
+
+    .page {
+        box-shadow: none;
+        margin: 0;
+        width: 100%;
+        height: auto;
+        max-height: auto;
+    }
+}
