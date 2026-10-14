@@ -6,7 +6,7 @@ function scaleToFit() {
     content.style.zoom = 1;
 
     // 1056px is 11 inches, then subtract header height and bottom padding
-    const availableHeight = 1056 - header.clientHeight - 60;
+    const availableHeight = 1056 - header.clientHeight - 50;
     const contentHeight = content.scrollHeight;
 
     if (contentHeight > availableHeight) {
