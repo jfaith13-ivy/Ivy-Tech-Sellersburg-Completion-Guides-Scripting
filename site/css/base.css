@@ -4,6 +4,7 @@
     --paper-color: white;
     --primary: #006648;
     --secondary: #8DC63F;
+    --banner: #41AD49;
     --header-text-color: white;
     --requirement: #EC6A5A;
     --elective: #FAA21B;
@@ -20,8 +21,8 @@
     font-weight: 500;
     font-style: normal;
     font-display: swap;
-    ascent-override: 86%;
-    descent-override: 14%;
+    /* ascent-override: 86%;
+    descent-override: 14%; */
 }
 
 @font-face {
@@ -30,8 +31,8 @@
     font-weight: 900;
     font-style: normal;
     font-display: swap;
-    ascent-override: 86%;
-    descent-override: 14%;
+    /* ascent-override: 86%;
+    descent-override: 14%; */
 }
 
 @font-face {
@@ -40,8 +41,8 @@
     font-weight: 500;
     font-style: italic;
     font-display: swap;
-    ascent-override: 86%;
-    descent-override: 14%;
+    /* ascent-override: 86%;
+    descent-override: 14%; */
 }
 
 @font-face {
@@ -62,6 +63,12 @@ body {
     margin: 0;
     font-family: "Avenir", sans-serif;
     font-size: 10pt;
+
+    -webkit-font-smoothing: antialiased;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+
+
 }
 
 .page {
@@ -110,7 +117,7 @@ body {
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            transform: translateY(-2px); /* for visual centering*/
+            /* transform: translateY(0px); for visual centering */
         }
         .header-logo {
             display: flex;
@@ -142,9 +149,11 @@ body {
         display: flex;
         align-items: center;
         justify-content: space-evenly;
+        margin-bottom: 5px;
         
         p {
             margin: 0;
+            padding-top: 3px;
             font-family: "Avenir", sans-serif;
         }
         .legend-required {
@@ -167,6 +176,8 @@ body {
 .badge {
     width: 16px;
     height: 16px;
+    margin-top: -10px;
+    margin-bottom: -10px;
 }
 
 .footer {
@@ -189,9 +200,15 @@ table {
         font-weight: 900;
     }
     td {
-        padding: 6px 8px;
+        /* padding: 4px 8px; */
+        padding: 3px 8px 1px 8px;
         color: var(--primary);
     }
+    td:has(.badges) {
+        padding: 4px 8px;
+    }
+    /* td span {
+    } */
     td:nth-child(1) { width: 50%; white-space: normal; word-break: break-word; }
     td:nth-child(2) { width: 12%; }
     td:nth-child(3) { width: 23%; }
@@ -209,8 +226,8 @@ table {
         gap: 4px;
         justify-content: right;
         align-items: center;
-        height: 0;
-        overflow: visible;
+        /* height: 0;
+        overflow: visible; */
     }
 }
 
@@ -221,7 +238,7 @@ table {
         .semester-block-header {
             background-color: var(--primary);
             color: var(--header-text-color);
-            padding: 8px 10px;
+            padding: 5px 10px 3px 10px;
             border-radius: 6px;
             font-family: "Avenir", sans-serif;
             font-weight: 900;
@@ -241,7 +258,7 @@ table {
 .degree-box {
     background-color: var(--secondary);
     color: var(--header-text-color);
-    padding: 7px;
+    padding: 4px 4px 2px 4px;
     text-align: center;
     font-family: "Avenir", sans-serif;
     font-weight: 900;
@@ -256,4 +273,25 @@ table {
 @page {
     size: letter;
     margin: 0in;
+}
+
+@media print {
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    body {
+        background-color: transparent;
+        padding: 0;
+        display: block;
+    }
+
+    .page {
+        box-shadow: none;
+        margin: 0;
+        width: 100%;
+        height: auto;
+        max-height: auto;
+    }
 }

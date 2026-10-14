@@ -6,10 +6,16 @@
     <title>Degree Completion Guides</title>
 
     <link rel="stylesheet" href="css/base.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="scripts/download.js"></script>
 </head>
 <body>
+    <header>
+        <button id="download-button" onclick="generatePDF()">Download PDF</button>
+    </header>
     <div class="page">
-        <header class="page-header">
+        <div class="page-header">
             <div class="title-container">
                 <div class="header-logo">
                     <img src="assets/svgs/ivy-logo.svg">
@@ -25,7 +31,7 @@
             </div>
             <div class="icon-legend">
                 <div class="legend-group">
-                    <img class="badge" src="assets/svgs/Requirment.svg" alt="">
+                    <img class="badge" src="assets/svgs/Requirment.svg" width="16" height="16" alt="">
                     <p class="legend-required">Required for that Semester</p>
                 </div>
                 <div class="legend-group">
