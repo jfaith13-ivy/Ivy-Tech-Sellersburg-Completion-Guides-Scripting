@@ -185,6 +185,8 @@ table {
     margin: 0px 5px 5px 5px;
     box-sizing: border-box;
     table-layout: fixed;
+    /* background-color: var(--dark-grey); */
+
     .course-number {
         font-weight: 900;
     }
@@ -197,11 +199,15 @@ table {
     td:nth-child(3) { width: 23%; }
     td:nth-child(4) { width: 10%; }
     td:nth-child(5) { width: 5%; }
-    tr:nth-child(even) {
+    tr:nth-child(even) td {
         background-color: var(--light-grey);
+        outline: 1px solid var(--light-grey);
+        outline-offset: -0.5px;
     }
-    tr:nth-child(odd) {
+    tr:nth-child(odd) td {
         background-color: var(--dark-grey);
+        outline: 1px solid var(--dark-grey);
+        outline-offset: -0.5px;
     }
 
     .badges {
