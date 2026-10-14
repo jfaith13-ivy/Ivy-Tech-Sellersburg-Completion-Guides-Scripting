@@ -1,6 +1,6 @@
 :root {
     /* colors */
-    --site-bg-color: grey;
+    --site-bg-color: #282828;
     --paper-color: white;
     --primary: #006648;
     --secondary: #8DC63F;
@@ -77,7 +77,6 @@ body {
 
 .page-header {
     width: 100%;
-    height: 110px;
     background-color: var(--primary);
     display: flex;
     flex-direction: column;
@@ -89,22 +88,33 @@ body {
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 100%;
+        height: 110px;
         gap: 10px;
         padding: 20px 60px;
         box-sizing: border-box;
         
+        .header-logo {
+            display: flex;
+            justify-content: center;
+
+            img {
+                width: 54px;
+            }
+        }
         .header-title {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            transform: translateY(-2px); /* for visual centering*/
+            transform: translateY(-3px); /* for visual centering*/
             
+            .keep-together,
             h1 {
                 font-family: "D-DIN-Condensed-Bold", sans-serif;
                 color: var(--header-text-color);
                 font-size: 28pt;
+            }
+            h1 {
                 margin: 0;
                 display: inline;
                 margin-right: 4px;
@@ -112,9 +122,6 @@ body {
             }
             .keep-together{
                 white-space: nowrap;
-                font-family: "D-DIN-Condensed-Bold", sans-serif;
-                color: var(--header-text-color);
-                font-size: 28pt;
             }
             h2 {
                 color: var(--secondary);
@@ -126,33 +133,19 @@ body {
                 height: 28px;
                 background-color: var(--header-text-color);
                 border-radius: 99px;
-                margin: 0 8px 6px 8px;
+                margin: 0 2px 6px 2px;
                 display: inline-block;
                 vertical-align: middle;
             }
-        }
-        .header-logo {
-            display: flex;
-            justify-content: center;
-
-            img {
-                width: 54px;
+            .course-name {
+                display: block;
+                transform-origin: top left;
             }
-        }
-        .course-name {
-            /* display: inline-block;
-            transform-origin: top left;
-            display: flex;
-            align-items: center;
-            gap: 10px; */
-            display: block;
-            transform-origin: top left;
         }
     }
     .icon-legend {
         background-color: var(--dark-grey);
-        min-height: 20px;
-        max-height: 20px;
+        height: 20px;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
@@ -178,6 +171,63 @@ body {
     }
 }
 
+.page-content {
+    padding: 0 0.25in 0 0.25in;
+    transform-origin: top center;
+
+    .semester-block-header {
+        background-color: var(--primary);
+        color: var(--header-text-color);
+        padding: 8px 10px;
+        border-radius: 6px;
+        font-family: "Avenir", sans-serif;
+        font-weight: 900;
+        margin-bottom: 0;
+        margin-top: 5px
+    }
+
+    table {
+        width: calc(100% - 10px);
+        border-collapse: collapse;
+        margin: 0px 5px 5px 5px;
+        box-sizing: border-box;
+        table-layout: fixed;
+    
+        .course-number {
+            font-weight: 900;
+        }
+        td {
+            padding: 6px 8px;
+            color: var(--primary);
+        }
+        td:nth-child(1) { width: 2%; padding: 0px 2px 1px 8px; }
+        td:nth-child(2) { width: 50%; white-space: normal; word-break: break-word; padding-left: 2px;}
+        td:nth-child(3) { width: 12%; }
+        td:nth-child(4) { width: 21%; }
+        td:nth-child(5) { width: 10%; }
+        td:nth-child(6) { width: 5%; }
+        tr:nth-child(even) td {
+            background-color: var(--light-grey);
+            outline: 1px solid var(--light-grey);
+            outline-offset: -0.5px;
+        }
+        tr:nth-child(odd) td {
+            background-color: var(--dark-grey);
+            outline: 1px solid var(--dark-grey);
+            outline-offset: -0.5px;
+        }
+    }
+}
+
+.badges {
+    display: flex;
+    gap: 4px;
+    justify-content: right;
+    align-items: center;
+    height: 0;
+    overflow: visible;
+}
+
 .badge {
     width: 16px;
     height: 16px;
@@ -185,8 +235,8 @@ body {
 
 .checkbox {
     display: flex;
-        justify-content: right;
-        align-items: center;
+    justify-content: right;
+    align-items: center;
         height: 0;
         overflow: visible;
 
@@ -204,67 +254,6 @@ body {
     color: var(--footer);
     font-style: italic;
     margin-top: 2px;
-}
-
-table {
-    width: calc(100% - 10px);
-    border-collapse: collapse;
-    margin: 0px 5px 5px 5px;
-    box-sizing: border-box;
-    table-layout: fixed;
-
-    .course-number {
-        font-weight: 900;
-    }
-    td {
-        padding: 6px 8px;
-        color: var(--primary);
-    }
-    td:nth-child(1) { width: 2%; padding: 0px 2px 1px 8px; }
-    td:nth-child(2) { width: 50%; white-space: normal; word-break: break-word; padding-left: 2px;}
-    td:nth-child(3) { width: 12%; }
-    td:nth-child(4) { width: 21%; }
-    td:nth-child(5) { width: 10%; }
-    td:nth-child(6) { width: 5%; }
-    tr:nth-child(even) td {
-        background-color: var(--light-grey);
-        outline: 1px solid var(--light-grey);
-        outline-offset: -0.5px;
-    }
-    tr:nth-child(odd) td {
-        background-color: var(--dark-grey);
-        outline: 1px solid var(--dark-grey);
-        outline-offset: -0.5px;
-    }
-
-    .badges {
-        display: flex;
-        gap: 4px;
-        justify-content: right;
-        align-items: center;
-        height: 0;
-        overflow: visible;
-    }
-}
-
-.page-content {
-    padding: 0 0.25in 0 0.25in;
-    transform-origin: top center;
-    /* scale: 0.5; */
-    /* transform: scale(0.25); */
-    /* zoom: 0.82; */
-    .semester-block {
-        .semester-block-header {
-            background-color: var(--primary);
-            color: var(--header-text-color);
-            padding: 8px 10px;
-            border-radius: 6px;
-            font-family: "Avenir", sans-serif;
-            font-weight: 900;
-            margin-bottom: 0;
-            margin-top: 5px
-        }
-    }
 }
 
 .degree-boxes {
