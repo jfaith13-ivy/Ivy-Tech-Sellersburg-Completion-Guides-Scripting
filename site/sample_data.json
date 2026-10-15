@@ -61,6 +61,10 @@
                 {
                     "type": "certification",
                     "name": "Certifications"
+                },
+                {
+                    "type": "certification",
+                    "name": "Test Cert"
                 }
             ]
         },

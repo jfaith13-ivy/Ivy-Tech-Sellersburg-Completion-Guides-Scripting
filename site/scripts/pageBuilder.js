@@ -2,12 +2,23 @@ const checkboxPath = "assets/svgs/checkbox-empty.svg";
 const electivePath = "assets/svgs/Elective.svg";
 const genEdPath = "assets/svgs/Gen_ed.svg";
 const requirementPath = "assets/svgs/Requirement.svg";
+const groupedSemesters = {
+    "Fall": ["Fall 1", "Fall 2"],
+    "Spring": ["Spring 1", "Spring 2"],
+    "Summer": ["Summer"]
+}
+const semesterOrder = [
+    groupedSemesters["Fall"],
+    groupedSemesters["Spring"],
+    groupedSemesters["Summer"]
+]
 
 function buildPage() {
     const content = document.querySelector('.page-content');
-    let _currentTable = null
+    let _currentTable = null;
+    let _degreeContainer = null;
 
-    fetch('/site/sample_data.json')
+    fetch('/site/sample_data2.json')
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
             return response.json();
@@ -15,27 +26,59 @@ function buildPage() {
         .then(data => {
             for (const [yearKey, yearValue] of Object.entries(data)) {
                 // these should be objects with key year, and semester object 
+                let semesters = {}; // for grouping
                 for (const [semesterKey, semesterValue] of Object.entries(yearValue)) {
-                    _currentTable = createSemesterBlock(semesterKey)
+                    const matchedKey = Object.keys(groupedSemesters).find(key => groupedSemesters[key].includes(semesterKey));
+                    if (matchedKey) {
+                        if (semesters[matchedKey]) {
+                            // for (course in semesterValue["items"]) {
+                            //     console.log(course);
+                            // }
+                            // console.log(semesterValue["items"])
+                            semesters[matchedKey].push(semesterValue["items"]);
+                            // console.log(semesterValue.items)
+                        }
+                        else {
+                            semesters[matchedKey] = [semesterValue["items"]]
+                        }
+                    }
+                    // for (const [itemKey] of Object.entries(semesterKey)) {
+                    //     // if the itemKey (which is a string, such as "Fall 2" or "Spring 1") in a value in a groupedSemesters array,
+                    //     // matchedKey gets set to the key name of that array (such as "Fall").
+                    //     // if not, matchedKey is null
+                        
+                    //     if (matchedKey) {
+                    //         groupedSemesters[matchedKey] = itemValue;
+                    //     }
+                    // }
+                    // console.log(groupedSemesters);
+                }
+                console.log(semesters);
+                for (const [semesterKey, semesterValue] of Object.entries(semesters)) {
+                    _currentTable = createSemesterBlock(semesterKey);
+                    _degreeContainer = createDegreeContainer() ;
                     
                     // each semester should hold an array of courses
-                    for (const [itemKey, itemValue] of Object.entries(semesterValue)) {
+                    for (const [groupedItemKey, groupedItemValue] of Object.entries(semesterValue)) {
                         // each item holds an array of dictionaries (each containg course info)
 
-                        for (const course of itemValue) {
+                        for (const course of groupedItemValue) {
                             // create a td for class_code, course_name, credit_hours, preferred_times, course_length, and add badges from course_type
-                            if (course.type != "course") {
-                                continue;
+                            if (course.type == "course") {
+                                const row = createTableRow(_currentTable);
+                                
+                                addTableData(row, buildCheckbox());
+                                addTableData(row, buildCourseName(course.class_code, course.course_name));
+                                addTableData(row, buildTextSpan(course.credit_hours + " Credits"));
+                                addTableData(row, buildTextSpan(course.preferred_times));
+                                addTableData(row, buildTextSpan(course.course_length));
+                                addTableData(row, buildBadges(course.course_type));
+                            }
+                            
+                            if (course.type == "certification") {
+                                buildCertBlock(_degreeContainer, course.name);
                             }
 
-                            const row = createTableRow(_currentTable);
-                            
-                            addTableData(row, buildCheckbox());
-                            addTableData(row, buildCourseName(course.class_code, course.course_name));
-                            addTableData(row, buildTextSpan(course.credit_hours + " Credits"));
-                            addTableData(row, buildTextSpan(course.preferred_times));
-                            addTableData(row, buildTextSpan(course.course_length));
-                            addTableData(row, buildBadges(course.course_type));
                         }
                     }
                 }
@@ -64,6 +107,14 @@ function buildPage() {
         newBlock.appendChild(blockTable);
         
         return blockTable;
+    }
+
+    function createDegreeContainer() {
+        const degrees = document.createElement("div");
+        degrees.classList.add("degree-boxes");
+        content.appendChild(degrees);
+
+        return degrees;
     }
 
     function createTableRow(table) {
@@ -109,6 +160,14 @@ function buildPage() {
         return courseDiv;
     }
 
+    function buildCertBlock(certContainer, name) {
+        const block = document.createElement("div");
+        block.textContent = name;
+        block.classList.add("degree-box");
+        certContainer.appendChild(block);
+
+    }
+
     function buildTextSpan(text) {
         const span = document.createElement("span");
         span.textContent = text;
@@ -120,7 +179,7 @@ function buildPage() {
         const badgePaths = {
             "General Education": genEdPath,
             "Elective": electivePath,
-            "Core Course": requirementPath
+            "Pre-Requisite for Program Admission": requirementPath
         };
         
         const badges = document.createElement("div");
