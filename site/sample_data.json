@@ -17,7 +17,7 @@
                         "Spring 1",
                         "Summer"
                     ],
-                    "course_type": "Core Course, Pre-Requisite for Program Admission",
+                    "course_type": ["Core Course", "Pre-Requisite for Program Admission"],
                     "modalities_offered": [
                         "Blended",
                         "IvyOnline",
@@ -34,7 +34,7 @@
                     "preferred_modality": "In-Person",
                     "course_length": "8 Weeks",
                     "other_sections_offered": "Yes",
-                    "course_type": "General Education, Pre-Requisite for Program Admission"
+                    "course_type": ["General Education", "Pre-Requisite for Program Admission"]
                 },
                 {
                     "type": "course",
@@ -45,7 +45,7 @@
                     "credit_hours": 3,
                     "preferred_modality": "In-Person",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course, Pre-Requisite for Program Admission"
+                    "course_type": ["Core Course", "Pre-Requisite for Program Admission"]
                 },
                 {
                     "type": "course",
@@ -56,7 +56,7 @@
                     "credit_hours": 1,
                     "preferred_modality": "In-Person",
                     "course_length": "8 Weeks",
-                    "course_type": "Pre-Requisite for Program Admission"
+                    "course_type": ["Pre-Requisite for Program Admission"]
                 },
                 {
                     "type": "certification",
@@ -81,7 +81,7 @@
                         "Spring 1",
                         "Summer"
                     ],
-                    "course_type": "Core Course, Pre-Requisite for Program Admission",
+                    "course_type": ["Core Course", "Pre-Requisite for Program Admission"],
                     "modalities_offered": [
                         "Blended",
                         "IvyOnline",
@@ -102,7 +102,7 @@
                     "preferred_modality": "In-Person",
                     "course_length": "8 Weeks",
                     "other_sections_offered": "Yes",
-                    "course_type": "General Education, Pre-Requisite for Program Admission"
+                    "course_type": ["General Education", "Pre-Requisite for Program Admission"]
                 },
                 {
                     "type": "course",
@@ -114,7 +114,7 @@
                     "preferred_modality": "In-Person",
                     "course_length": "8 Weeks",
                     "other_sections_offered": "Yes",
-                    "course_type": "General Education, Pre-Requisite for Program Admission"
+                    "course_type": ["General Education", "Pre-Requisite for Program Admission"]
                 }
             ]
         },
@@ -130,7 +130,7 @@
                     "preferred_modality": "In-Person",
                     "course_length": "8 Weeks",
                     "other_sections_offered": "Yes",
-                    "course_type": "General Education, Pre-Requisite for Program Admission"
+                    "course_type": ["General Education", "Pre-Requisite for Program Admission"]
                 },
                 {
                     "type": "course",
@@ -141,7 +141,7 @@
                     "credit_hours": 3,
                     "preferred_modality": "In-Person",
                     "course_length": "8 Weeks",
-                    "course_type": "General Education, Pre-Requisite for Program Admission"
+                    "course_type": ["General Education", "Pre-Requisite for Program Admission"]
                 }
             ]
         },
@@ -161,7 +161,7 @@
                     "credit_hours": 2,
                     "preferred_modality": "In-Person",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 },
                 {
                     "type": "course",
@@ -172,7 +172,7 @@
                     "credit_hours": 2,
                     "preferred_modality": "In-Person",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 },
                 {
                     "type": "course",
@@ -183,7 +183,7 @@
                     "credit_hours": 4,
                     "preferred_modality": "In-Person",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 },
                 {
                     "type": "course",
@@ -194,7 +194,7 @@
                     "credit_hours": 3,
                     "preferred_modality": "In-Person",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 },
                 {
                     "type": "course",
@@ -205,7 +205,7 @@
                     "credit_hours": 3,
                     "preferred_modality": "In-Person",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course", "Elective"]
                 }
             ]
         },
@@ -221,7 +221,7 @@
                     "preferred_times": "TBD",
                     "credit_hours": 1,
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 },
                 {
                     "type": "course",
@@ -232,7 +232,7 @@
                     "credit_hours": 2,
                     "preferred_modality": "In-Person",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 },
                 {
                     "type": "course",
@@ -243,7 +243,7 @@
                     "credit_hours": 4,
                     "preferred_modality": "In-Person",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 },
                 {
                     "type": "course",
@@ -254,7 +254,7 @@
                     "credit_hours": 3,
                     "preferred_modality": "In-Person",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 },
                 {
                     "type": "course",
@@ -265,7 +265,7 @@
                     "credit_hours": 3,
                     "preferred_modality": "In-Person",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 }
             ]
         },
@@ -283,7 +283,7 @@
                     "credit_hours": 1,
                     "preferred_modality": "In-Person",
                     "course_length": "8 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 },
                 {
                     "type": "course",
@@ -310,7 +310,7 @@
                     "credit_hours": 3,
                     "preferred_modality": "In-Person",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 },
                 {
                     "type": "course",
@@ -319,7 +319,7 @@
                     "credit_hours": 3,
                     "preferred_modality": "IvyOnline",
                     "course_length": "16 Weeks",
-                    "course_type": "Core Course"
+                    "course_type": ["Core Course"]
                 }
             ]
         }

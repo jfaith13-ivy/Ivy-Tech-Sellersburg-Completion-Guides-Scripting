@@ -193,7 +193,7 @@ body {
         box-sizing: border-box;
         table-layout: fixed;
     
-        .course-number {
+        .class-code {
             font-weight: 900;
         }
         td {
@@ -230,7 +230,9 @@ body {
 
 .badge {
     width: 16px;
-    height: 16px;
+    min-width: 16px;
+    /* height: 16px;
+    min-height: 16px; */
 }
 
 .checkbox {
