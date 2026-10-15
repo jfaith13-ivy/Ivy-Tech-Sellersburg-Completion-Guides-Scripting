@@ -130,10 +130,9 @@ function buildPage() {
 
         // right now the value of courseType is a comma separated string,
         // but I will change the converter to output an array instead.
+        // currently using a sample where I manually swapped the strings to arrays.
         for (const type of courseType) {
-            // console.log(type);
             if (Object.hasOwn(badgePaths, type)) {
-                // console.log(badgePaths[type]);
                 const badge = createBadge(badgePaths[type]);
                 badges.appendChild(badge);
             }
