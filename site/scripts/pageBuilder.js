@@ -2,21 +2,15 @@ const checkboxPath = "assets/svgs/checkbox-empty.svg";
 const electivePath = "assets/svgs/Elective.svg";
 const genEdPath = "assets/svgs/Gen_ed.svg";
 const requirementPath = "assets/svgs/Requirement.svg";
+
 const groupedSemesters = {
     "Fall": ["Fall 1", "Fall 2"],
     "Spring": ["Spring 1", "Spring 2"],
     "Summer": ["Summer"]
 }
-const semesterOrder = [
-    groupedSemesters["Fall"],
-    groupedSemesters["Spring"],
-    groupedSemesters["Summer"]
-]
 
 function buildPage() {
     const content = document.querySelector('.page-content');
-    let _currentTable = null;
-    let _degreeContainer = null;
 
     fetch('/site/sample_data2.json')
         .then(response => {
@@ -25,60 +19,43 @@ function buildPage() {
         })
         .then(data => {
             for (const [yearKey, yearValue] of Object.entries(data)) {
-                // these should be objects with key year, and semester object 
-                let semesters = {}; // for grouping
+                let semesters = {}; // for grouping (e.g. "Fall 1" and "Fall 2" are grouped into "Fall")
+                // these should be objects with key year, and value array of semester items
                 for (const [semesterKey, semesterValue] of Object.entries(yearValue)) {
                     const matchedKey = Object.keys(groupedSemesters).find(key => groupedSemesters[key].includes(semesterKey));
                     if (matchedKey) {
-                        if (semesters[matchedKey]) {
-                            // for (course in semesterValue["items"]) {
-                            //     console.log(course);
-                            // }
-                            // console.log(semesterValue["items"])
-                            semesters[matchedKey].push(semesterValue["items"]);
-                            // console.log(semesterValue.items)
+                        if (!semesters[matchedKey]) {
+                            semesters[matchedKey] = [];
                         }
-                        else {
-                            semesters[matchedKey] = [semesterValue["items"]]
+                        for (course of semesterValue["items"]) {
+                            semesters[matchedKey].push(course);
                         }
                     }
-                    // for (const [itemKey] of Object.entries(semesterKey)) {
-                    //     // if the itemKey (which is a string, such as "Fall 2" or "Spring 1") in a value in a groupedSemesters array,
-                    //     // matchedKey gets set to the key name of that array (such as "Fall").
-                    //     // if not, matchedKey is null
-                        
-                    //     if (matchedKey) {
-                    //         groupedSemesters[matchedKey] = itemValue;
-                    //     }
-                    // }
-                    // console.log(groupedSemesters);
                 }
-                console.log(semesters);
                 for (const [semesterKey, semesterValue] of Object.entries(semesters)) {
-                    _currentTable = createSemesterBlock(semesterKey);
-                    _degreeContainer = createDegreeContainer() ;
+                    if (semesterValue.length == 0) {
+                        // don't add semester or degree blocks if there are no courses or certs
+                        continue;
+                    }
+                    const _currentTable = createSemesterBlock(semesterKey);
+                    const _degreeContainer = createDegreeContainer() ;
                     
                     // each semester should hold an array of courses
-                    for (const [groupedItemKey, groupedItemValue] of Object.entries(semesterValue)) {
-                        // each item holds an array of dictionaries (each containg course info)
-
-                        for (const course of groupedItemValue) {
-                            // create a td for class_code, course_name, credit_hours, preferred_times, course_length, and add badges from course_type
-                            if (course.type == "course") {
-                                const row = createTableRow(_currentTable);
-                                
-                                addTableData(row, buildCheckbox());
-                                addTableData(row, buildCourseName(course.class_code, course.course_name));
-                                addTableData(row, buildTextSpan(course.credit_hours + " Credits"));
-                                addTableData(row, buildTextSpan(course.preferred_times));
-                                addTableData(row, buildTextSpan(course.course_length));
-                                addTableData(row, buildBadges(course.course_type));
-                            }
+                    for (const [, course] of Object.entries(semesterValue)) {
+                        // create a td for class_code, course_name, credit_hours, preferred_times, course_length, and add badges from course_type
+                        if (course.type == "course") {
+                            const row = createTableRow(_currentTable);
                             
-                            if (course.type == "certification") {
-                                buildCertBlock(_degreeContainer, course.name);
-                            }
-
+                            addTableData(row, buildCheckbox());
+                            addTableData(row, buildCourseName(course.class_code, course.course_name));
+                            addTableData(row, buildTextSpan(course.credit_hours + " Credits"));
+                            addTableData(row, buildTextSpan(course.preferred_times));
+                            addTableData(row, buildTextSpan(course.course_length));
+                            addTableData(row, buildBadges(course.course_type));
+                        }
+                        
+                        if (course.type == "certification") {
+                            buildCertBlock(_degreeContainer, course.name);
                         }
                     }
                 }
