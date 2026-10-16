@@ -18,7 +18,6 @@ function buildPage() {
             return response.json();
         })
         .then(data => {
-            setName("TEST DEGREE", "AAS");
             for (const [yearKey, yearValue] of Object.entries(data)) {
                 let semesters = {}; // for grouping (e.g. "Fall 1" and "Fall 2" are grouped into "Fall")
                 // these should be objects with key year, and value array of semester items
@@ -196,19 +195,26 @@ function buildPage() {
 
         const words = degreeName.split(/\s+/); // split at spaces
         if (words.length > 1) {
-            const firstWords = words.slice(0, -1).join(" ");
-            const lastWord = words.at(-1);
+            const firstWords = words.slice(0, -1).join(" ").toUpperCase();
+            const lastWord = words.at(-1).toUpperCase();
 
             titleFirstWords.textContent = firstWords;
             titleLastWord.textContent = lastWord;
         }
         else {
-            titleFirstWords.textContent = degreeName;
+            titleFirstWords.textContent = degreeName.toUpperCase();
             titleLastWord.textContent = "";
         }
 
         titleDegreeType.textContent = degreeType;
-        document.title = degreeName + " - " + degreeType;
+
+        // this is also what the printed file name will default to
+        const titleCaseName = degreeName
+            .toLowerCase()
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+        document.title = titleCaseName + " - " + degreeType;
 
         if (titleContainer.offsetHeight > 50) {
             titleContainer.classList.add("small-name");
