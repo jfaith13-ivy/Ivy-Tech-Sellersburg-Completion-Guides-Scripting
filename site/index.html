@@ -6,45 +6,60 @@
     <title>Degree Completion Guide</title>
 
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/page.css">
+
+    <!-- iconify import -->
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+
+    <script src="scripts/pageBuilder.js"></script>
 </head>
 <body onload="buildPage()">
-    <div class="page">
-        <header class="page-header">
-            <div class="title-container">
-                <div class="header-logo">
-                    <img src="assets/svgs/ivy-logo.svg">
-                </div>
-                <div class="header-title">
-                    <div class="course-name" id="title-container">
-                        <h1 id="title-first-words">DEGREE NAME GOES</h1>
-                        <span class="keep-together">
-                            <span id="title-last-word">HERE</span>
-                            <span class="rounded-line"></span>
-                            <span id="degree-type">DEGREE TYPE</span>
-                        </span>
+    <header>
+        <button id="back-button" title="Back">
+             <iconify-icon icon="akar-icons:chevron-left"></iconify-icon>
+            </button>
+            <button id="print-button" title="Print" onclick="window.print()">
+                <iconify-icon icon="famicons:print-outline"></iconify-icon>
+        </button>
+    </header>
+    <div class="container">
+        <div class="page">
+            <div class="page-header">
+                <div class="title-container">
+                    <div class="header-logo">
+                        <img src="assets/svgs/ivy-logo.svg">
                     </div>
-                    <h2>Completion Guide</h2>
+                    <div class="header-title">
+                        <div class="course-name" id="title-container">
+                            <h1 id="title-first-words">DEGREE NAME GOES</h1>
+                            <span class="keep-together">
+                                <span id="title-last-word">HERE</span>
+                                <span class="rounded-line"></span>
+                                <span id="degree-type">DEGREE TYPE</span>
+                            </span>
+                        </div>
+                        <h2>Completion Guide</h2>
+                    </div>
+                </div>
+                <div class="icon-legend">
+                    <div class="legend-group">
+                        <img class="badge" src="assets/svgs/Requirement.svg" alt="">
+                        <p class="legend-required">Required for that Semester</p>
+                    </div>
+                    <div class="legend-group">
+                        <img class="badge" src="assets/svgs/Elective.svg" alt="">
+                        <p class="legend-elective">Elective</p>
+                    </div>
+                    <div class="legend-group">
+                        <img class="badge" src="assets/svgs/Gen_ed.svg" alt="">
+                        <p class="legend-general">General Education</p>
+                    </div>
                 </div>
             </div>
-            <div class="icon-legend">
-                <div class="legend-group">
-                    <img class="badge" src="assets/svgs/Requirement.svg" alt="">
-                    <p class="legend-required">Required for that Semester</p>
-                </div>
-                <div class="legend-group">
-                    <img class="badge" src="assets/svgs/Elective.svg" alt="">
-                    <p class="legend-elective">Elective</p>
-                </div>
-                <div class="legend-group">
-                    <img class="badge" src="assets/svgs/Gen_ed.svg" alt="">
-                    <p class="legend-general">General Education</p>
-                </div>
+            <div class="page-content" id="page-content">
+                <div class="footer" id="footer">Some courses may be offered at various times or course modality. Please speak to your advisor for those options.</div>
             </div>
-        </header>
-        <div class="page-content" id="page-content">
-            <div class="footer" id="footer">Some courses may be offered at various times or course modality. Please speak to your advisor for those options.</div>
         </div>
     </div>
-    <script src="scripts/pageBuilder.js"></script>
 </body>
 </html>

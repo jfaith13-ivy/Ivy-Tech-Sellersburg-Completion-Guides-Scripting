@@ -1,319 +1,56 @@
 :root {
-    /* colors */
+    --site-header-color: #3e3e3e;
     --site-bg-color: #282828;
-    --paper-color: white;
-    --primary: #006648;
-    --secondary: #8DC63F;
-    --header-text-color: white;
-    --requirement: #EC6A5A;
-    --elective: #FAA21B;
-    --fall-only: #D15D27;
-    --dual-credit: #253959;
-    --dark-grey: #d1d1d1;
-    --light-grey: #ebebeb;
-    --footer: black;
 }
 
-@font-face {
-    font-family: "Avenir";
-    src: url("../assets/fonts/Avenir Medium.woff2") format("woff2");
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-    ascent-override: 86%;
-    descent-override: 14%;
-}
-
-@font-face {
-    font-family: "Avenir";
-    src: url("../assets/fonts/Avenir Black.woff2") format("woff2");
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-    ascent-override: 86%;
-    descent-override: 14%;
-}
-
-@font-face {
-    font-family: "Avenir";
-    src: url("../assets/fonts/Avenir BookOblique.woff2") format("woff2");
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
-    ascent-override: 86%;
-    descent-override: 14%;
-}
-
-@font-face {
-    font-family: "D-DIN-Condensed-Bold";
-    src: url("../assets/fonts/D-DIN-Condensed-Bold.woff2") format("woff2");
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     background-color: var(--site-bg-color);
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
     margin: 0;
-    font-family: "Avenir", sans-serif;
-    font-size: 10pt;
-}
-
-.page {
-    background: var(--paper-color);
-    width: 8.5in;
-    min-width: 8.5in;
-    height: 11in;
-    max-height: 11in;
-    box-sizing: border-box;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    margin-bottom: 20px;
-}
-
-.page-header {
-    width: 100%;
-    background-color: var(--primary);
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    
-    .title-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 110px;
-        gap: 10px;
-        padding: 20px 60px;
-        box-sizing: border-box;
-        
-        .header-logo {
-            display: flex;
-            justify-content: center;
-
-            img {
-                width: 54px;
-            }
-        }
-        .header-title {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            transform: translateY(-3px); /* for visual centering*/
-            
-            .keep-together,
-            h1 {
-                font-family: "D-DIN-Condensed-Bold", sans-serif;
-                color: var(--header-text-color);
-                font-size: 28pt;
-            }
-            h1 {
-                margin: 0;
-                display: inline;
-                margin-right: 4px;
-                line-height: 0.8;;
-            }
-            .keep-together{
-                white-space: nowrap;
-            }
-            h2 {
-                color: var(--secondary);
-                margin: -5px 0;
-                font-size: 12pt;
-            }
-            .rounded-line {
-                width: 4px;
-                height: 28px;
-                background-color: var(--header-text-color);
-                border-radius: 99px;
-                margin: 0 2px 6px 2px;
-                display: inline-block;
-                vertical-align: middle;
-            }
-            .course-name {
-                display: block;
-                transform-origin: top left;
-            }
-            .small-name {
-                h1,
-                span {
-                    font-size: 26pt;
-                }
-
-                .rounded-line {
-                    height: 26px;
-                    margin: 0px 2px 5px 2px;
-                }
-            }
-        }
-    }
-    .icon-legend {
-        background-color: var(--dark-grey);
-        height: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        
-        p {
-            margin: 0;
-            font-family: "Avenir", sans-serif;
-        }
-        .legend-required {
-            color: var(--requirement);
-        }
-        .legend-elective {
-            color: var(--elective);
-        }
-        .legend-general {
-            color: var(--primary);
-        }
-        .legend-group {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-        }
-    }
 }
 
-.page-content {
-    padding: 0 0.25in 0 0.25in;
-    transform-origin: top center;
+header {
+    background-color: var(--site-header-color);
+    box-sizing: border-box;
+    height: 36px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    z-index: 10;
+    flex-shrink: 0;
 
-    .semester-block-header {
-        background-color: var(--primary);
-        color: var(--header-text-color);
-        padding: 8px 10px;
+    button {
+        background: transparent;
+        color: white;
+        border: none;
         border-radius: 6px;
-        font-family: "Avenir", sans-serif;
-        font-weight: 900;
-        margin-bottom: 0;
-        margin-top: 5px
-    }
-
-    table {
-        width: calc(100% - 10px);
-        border-collapse: collapse;
-        margin: 0px 5px 5px 5px;
-        box-sizing: border-box;
-        table-layout: fixed;
-    
-        .class-code {
-            font-weight: 900;
-        }
-        td {
-            padding: 6px 8px;
-            color: var(--primary);
-        }
-        td:nth-child(1) { width: 2%; padding: 0px 2px 1px 8px; }
-        td:nth-child(2) { width: 50%; white-space: normal; word-break: break-word; padding-left: 2px;}
-        td:nth-child(3) { width: 12%; text-align: center; }
-        td:nth-child(4) { width: 21%; text-align: center; }
-        td:nth-child(5) { width: 10%; text-align: center; }
-        td:nth-child(6) { width: 5%; }
-        .unused {
-            width: 0;    
-        }
-        tr:nth-child(even) td {
-            background-color: var(--light-grey);
-            outline: 1px solid var(--light-grey);
-            outline-offset: -0.5px;
-        }
-        tr:nth-child(odd) td {
-            background-color: var(--dark-grey);
-            outline: 1px solid var(--dark-grey);
-            outline-offset: -0.5px;
-        }
-    }
-}
-
-.badges {
-    display: flex;
-    gap: 4px;
-    justify-content: right;
-    align-items: center;
-    height: 0;
-    overflow: visible;
-}
-
-.badge {
-    width: 16px;
-    min-width: 16px;
-}
-
-.checkbox {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-        height: 0;
-        overflow: visible;
-
-    img {
-        width: 16px;
-        height: 16px;
-    }
-}
-
-.footer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--footer);
-    font-style: italic;
-    margin-top: 2px;
-}
-
-.degree-boxes {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 5px 0 5px;
-    gap: 5px;
-}
-
-.degree-box {
-    background-color: var(--secondary);
-    color: var(--header-text-color);
-    padding: 7px;
-    text-align: center;
-    font-family: "Avenir", sans-serif;
-    font-weight: 900;
-    box-sizing: border-box;
-    white-space: nowrap;
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-@page {
-    size: letter;
-    margin: 0in;
-}
-
-@media print {
-    * {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-
-    body {
-        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        aspect-ratio: 1;
         padding: 0;
-        display: block;
     }
-
-    .page {
-        box-shadow: none;
-        margin: 0;
-        width: 100%;
-        height: auto;
-        max-height: auto;
+    button:hover {
+        background-color: rgba(128, 128, 128, 0.317);
+    }
+    button:active {
+        background-color: rgba(128, 128, 128, 0.539);
+    }
+    button:focus-visible {
+        outline: 3px solid #9bcbff;
+        outline-offset: 2px;
+    }
+    iconify-icon {
+        font-size: 1.6em;
     }
 }
