@@ -18,6 +18,7 @@ function buildPage() {
             return response.json();
         })
         .then(data => {
+            setName("TEST DEGREE", "AAS");
             for (const [yearKey, yearValue] of Object.entries(data)) {
                 let semesters = {}; // for grouping (e.g. "Fall 1" and "Fall 2" are grouped into "Fall")
                 // these should be objects with key year, and value array of semester items
@@ -183,6 +184,34 @@ function buildPage() {
             badge.alt = "";
 
             return badge;
+        }
+    }
+
+    function setName(degreeName, degreeType) {
+        const titleContainer = document.getElementById("title-container");
+        const titleFirstWords = document.getElementById("title-first-words");
+        const titleLastWord = document.getElementById("title-last-word");
+        const titleDegreeType = document.getElementById("degree-type");
+        const pageTitle = document.getElementById("page-title");
+
+        const words = degreeName.split(/\s+/); // split at spaces
+        if (words.length > 1) {
+            const firstWords = words.slice(0, -1).join(" ");
+            const lastWord = words.at(-1);
+
+            titleFirstWords.textContent = firstWords;
+            titleLastWord.textContent = lastWord;
+        }
+        else {
+            titleFirstWords.textContent = degreeName;
+            titleLastWord.textContent = "";
+        }
+
+        titleDegreeType.textContent = degreeType;
+        document.title = degreeName + " - " + degreeType;
+
+        if (titleContainer.offsetHeight > 50) {
+            titleContainer.classList.add("small-name");
         }
     }
 }

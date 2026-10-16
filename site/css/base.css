@@ -141,6 +141,17 @@ body {
                 display: block;
                 transform-origin: top left;
             }
+            .small-name {
+                h1,
+                span {
+                    font-size: 26pt;
+                }
+
+                .rounded-line {
+                    height: 26px;
+                    margin: 0px 2px 5px 2px;
+                }
+            }
         }
     }
     .icon-legend {
@@ -203,9 +214,12 @@ body {
         td:nth-child(1) { width: 2%; padding: 0px 2px 1px 8px; }
         td:nth-child(2) { width: 50%; white-space: normal; word-break: break-word; padding-left: 2px;}
         td:nth-child(3) { width: 12%; text-align: center; }
-        td:nth-child(4) { width: 21%; text-align: center;  }
-        td:nth-child(5) { width: 10%; text-align: center;  }
+        td:nth-child(4) { width: 21%; text-align: center; }
+        td:nth-child(5) { width: 10%; text-align: center; }
         td:nth-child(6) { width: 5%; }
+        .unused {
+            width: 0;    
+        }
         tr:nth-child(even) td {
             background-color: var(--light-grey);
             outline: 1px solid var(--light-grey);
