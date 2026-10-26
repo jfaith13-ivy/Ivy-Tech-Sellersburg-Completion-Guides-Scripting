@@ -3,63 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Degree Completion Guide</title>
+    <title>Degree Completion Guide Creator</title>
 
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/upload.css">
 
     <!-- iconify import -->
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
 
-    <script src="scripts/pageBuilder.js"></script>
 </head>
-<body onload="buildPage()">
-    <header>
-        <button id="back-button" title="Back">
-             <iconify-icon icon="akar-icons:chevron-left"></iconify-icon>
-            </button>
-            <button id="print-button" title="Print" onclick="window.print()">
-                <iconify-icon icon="famicons:print-outline"></iconify-icon>
-        </button>
-    </header>
-    <div class="container">
-        <div class="page">
-            <div class="page-header">
-                <div class="title-container">
-                    <div class="header-logo">
-                        <img src="assets/svgs/ivy-logo.svg">
-                    </div>
-                    <div class="header-title">
-                        <div class="course-name" id="title-container">
-                            <h1 id="title-first-words">DEGREE NAME GOES</h1>
-                            <span class="keep-together">
-                                <span id="title-last-word">HERE</span>
-                                <span class="rounded-line"></span>
-                                <span id="degree-type">DEGREE TYPE</span>
-                            </span>
-                        </div>
-                        <h2>Completion Guide</h2>
-                    </div>
-                </div>
-                <div class="icon-legend">
-                    <div class="legend-group">
-                        <img class="badge" src="assets/svgs/Requirement.svg" alt="">
-                        <p class="legend-required">Required for that Semester</p>
-                    </div>
-                    <div class="legend-group">
-                        <img class="badge" src="assets/svgs/Elective.svg" alt="">
-                        <p class="legend-elective">Elective</p>
-                    </div>
-                    <div class="legend-group">
-                        <img class="badge" src="assets/svgs/Gen_ed.svg" alt="">
-                        <p class="legend-general">General Education</p>
-                    </div>
-                </div>
+<body>
+    <!-- <h1>Completion Guide Builder</h1> -->
+    <input type="file" id="cv-upload" accept=".csv">
+    
+    <label for="cv-upload" id="cv-drop-zone">
+        <iconify-icon icon="cuida:upload-outline"></iconify-icon>
+        <div class="inner-container">
+            <div class="description">
+                <p class="instruction">Click to upload</p>
+                <p class="action">or drag and drop</p>
             </div>
-            <div class="page-content" id="page-content">
-                <div class="footer" id="footer">Some courses may be offered at various times or course modality. Please speak to your advisor for those options.</div>
-            </div>
+            <p class="file-type-info">CSV file from template only</p>
         </div>
-    </div>
+    </label>
+    <script src="scripts/upload.js"></script>
 </body>
 </html>

@@ -11,64 +11,63 @@ const groupedSemesters = {
 
 function buildPage() {
     const content = document.querySelector('.page-content');
+    const storedData = sessionStorage.getItem("csvData");
 
-    fetch('/site/sample_data2.json')
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
-        .then(data => {
-            for (const [yearKey, yearValue] of Object.entries(data)) {
-                let semesters = {}; // for grouping (e.g. "Fall 1" and "Fall 2" are grouped into "Fall")
-                // these should be objects with key year, and value array of semester items
-                for (const [semesterKey, semesterValue] of Object.entries(yearValue)) {
-                    const matchedKey = Object.keys(groupedSemesters).find(key => groupedSemesters[key].includes(semesterKey));
-                    if (matchedKey) {
-                        if (!semesters[matchedKey]) {
-                            semesters[matchedKey] = [];
-                        }
-                        for (course of semesterValue["items"]) {
-                            semesters[matchedKey].push(course);
-                        }
+    if (storedData) {
+        const data = JSON.parse(storedData);
+
+        for (const [yearKey, yearValue] of Object.entries(data)) {
+            let semesters = {}; // for grouping (e.g. "Fall 1" and "Fall 2" are grouped into "Fall")
+            // these should be objects with key year, and value array of semester items
+            for (const [semesterKey, semesterValue] of Object.entries(yearValue)) {
+                const matchedKey = Object.keys(groupedSemesters).find(key => groupedSemesters[key].includes(semesterKey));
+                if (matchedKey) {
+                    if (!semesters[matchedKey]) {
+                        semesters[matchedKey] = [];
                     }
-                }
-                for (const [semesterKey, semesterValue] of Object.entries(semesters)) {
-                    if (semesterValue.length == 0) {
-                        // don't add semester or degree blocks if there are no courses or certs
-                        continue;
-                    }
-                    const _currentTable = createSemesterBlock(semesterKey);
-                    const _degreeContainer = createDegreeContainer() ;
-                    
-                    // each semester should hold an array of courses
-                    for (const [, course] of Object.entries(semesterValue)) {
-                        // create a td for class_code, course_name, credit_hours, preferred_times, course_length, and add badges from course_type
-                        if (course.type == "course") {
-                            const row = createTableRow(_currentTable);
-                            
-                            addTableData(row, buildCheckbox());
-                            addTableData(row, buildCourseName(course.class_code, course.course_name));
-                            addTableData(row, buildTextSpan(course.credit_hours + " Credits"));
-                            addTableData(row, buildTextSpan(course.preferred_times));
-                            addTableData(row, buildTextSpan(course.course_length));
-                            addTableData(row, buildBadges(course.course_type));
-                        }
-                        
-                        if (course.type == "certification") {
-                            buildCertBlock(_degreeContainer, course.name);
-                        }
+                    for (course of semesterValue["items"]) {
+                        semesters[matchedKey].push(course);
                     }
                 }
             }
+            for (const [semesterKey, semesterValue] of Object.entries(semesters)) {
+                if (semesterValue.length == 0) {
+                    // don't add semester or degree blocks if there are no courses or certs
+                    continue;
+                }
+                const _currentTable = createSemesterBlock(semesterKey);
+                const _degreeContainer = createDegreeContainer() ;
+                
+                // each semester should hold an array of courses
+                for (const [, course] of Object.entries(semesterValue)) {
+                    // create a td for class_code, course_name, credit_hours, preferred_times, course_length, and add badges from course_type
+                    if (course.type == "course") {
+                        const row = createTableRow(_currentTable);
+                        
+                        addTableData(row, buildCheckbox());
+                        addTableData(row, buildCourseName(course.class_code, course.course_name));
+                        addTableData(row, buildTextSpan(course.credit_hours + " Credits"));
+                        addTableData(row, buildTextSpan(course.preferred_times));
+                        addTableData(row, buildTextSpan(course.course_length));
+                        addTableData(row, buildBadges(course.course_type));
+                    }
+                    
+                    if (course.type == "certification") {
+                        buildCertBlock(_degreeContainer, course.name);
+                    }
+                }
+            }
+        }
 
-            // move the footer to the bottom
-            const footer = document.getElementById("footer");
-            content.appendChild(footer);
+        // move the footer to the bottom
+        const footer = document.getElementById("footer");
+        content.appendChild(footer);
 
-            // scale the page down to fit
-            scaleToFit();
-        })
-        .catch(error => console.error('Error loading JSON:', error));
+        // scale the page down to fit
+        scaleToFit();
+    } else {
+        window.location.href = "/";
+    }
 
     function createSemesterBlock(name) {
         const newBlock = document.createElement("div");
