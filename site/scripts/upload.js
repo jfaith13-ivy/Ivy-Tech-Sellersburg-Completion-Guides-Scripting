@@ -10,7 +10,16 @@ fileInput.addEventListener("change", (e) => {
 
 dropzoneContainer.addEventListener("dragover", (e) => {
     e.preventDefault()
-    dropzoneContainer.classList.add("dragging")
+
+    const isValid = Array.from(e.dataTransfer.items).every(item => {
+        return item.kind === "file" && item.type === "text/csv";
+    })
+
+    if (isValid) {
+        dropzoneContainer.classList.add("dragging")
+    } else {
+        dropzoneContainer.classList.add("dragging-invalid")
+    }
 })
 
 dropzoneContainer.addEventListener("drop", (e) => {
@@ -26,12 +35,13 @@ dropzoneContainer.addEventListener("drop", (e) => {
 
 dropzoneContainer.addEventListener("dragleave", (e) => {
     dropzoneContainer.classList.remove("dragging")
+    dropzoneContainer.classList.remove("dragging-invalid")
 })
 
 function convert(file) {
     console.log(file.name)
 
-    fetch('/site/sample_data2.json')
+    fetch('/site/sample_data.json')
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
             return response.json();
