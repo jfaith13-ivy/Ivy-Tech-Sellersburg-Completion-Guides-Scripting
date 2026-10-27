@@ -1,3 +1,12 @@
+:root {
+    /* colors */
+    --text-color: white;
+    --prompt-text-color: #3b82f6;
+    --border-color: #e2e8f0;
+    --border-dragged-color: #d1d5db;
+    --hover-primary: #077c59;
+}
+
 input[type="file"] {
   display: none;
 }
@@ -12,60 +21,85 @@ p {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-label {
-  display: inline-block;
-  width: 80%;
-  max-width: 400px;
-  margin: 20% auto;
-  border-radius: 0.5rem;
-  padding-inline: 1.5rem;
-  padding-block: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  align-items: center;
-  cursor: pointer;
-  border-width: 3px;
-  border-style: dashed;
-  border-color: #e2e8f0;
+.cv-container {
+    /* display: inline-block; */
+    width: 80%;
+    max-width: 400px;
+    height: 140px;
+    margin: 20% auto;
+    border-radius: 1rem;
+    /* padding-inline: 1.2rem; */
+    /* padding-block: 1rem; */
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--primary);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+    transition: background-color 0.3s ease;
 }
 
-label * {
+#cv-drop-zone {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    border-width: 3px;
+    border-style: dashed;
+    border-color: var(--border-color);
+}
+
+body:has(#cv-drop-zone:hover) .cv-container {
+    background-color: var(--hover-primary);
+}
+
+#cv-drop-zone * {
     pointer-events: none;
 }
 
-label.dragging {
+#cv-drop-zone.dragging {
   border-style: solid;
-  border-color: #d1d5db;
+  border-color: var(--border-dragged-color);
 }
 
-label .inner-container {
+body:has(#cv-drop-zone.dragging) .cv-container {
+    padding-inline: 0rem;
+    padding-block: 0rem;
+}
+
+#cv-drop-zone .inner-container {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
 
-label .inner-container .description {
+#cv-drop-zone .inner-container .description {
   display: flex;
   gap: 0.25rem;
   justify-content: center;
 }
 
-label .inner-container .description .instruction {
+#cv-drop-zone .inner-container .description .instruction {
   font-size: 0.875rem;
-  font-weight: 500;
-  color: #3b82f6;
+  font-weight: 700;
+  color: var(--prompt-text-color);
 }
 
-label .inner-container .description .action {
+#cv-drop-zone .inner-container .description .action {
   font-size: 0.875rem;
   font-weight: normal;
-  color: #6b7280;
+  color: var(--text-color);
 }
 
-label .inner-container .file-type-info {
+#cv-drop-zone .inner-container .file-type-info {
   font-size: 0.75rem;
   font-weight: normal;
-  color: #6b7280;
+  color: var(--text-color);
   text-align: center;
 }

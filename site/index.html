@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Degree Completion Guide Creator</title>
+    <title>Completion Guide Builder</title>
 
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/upload.css">
@@ -13,19 +13,20 @@
 
 </head>
 <body>
-    <!-- <h1>Completion Guide Builder</h1> -->
-    <input type="file" id="cv-upload" accept=".csv">
-    
-    <label for="cv-upload" id="cv-drop-zone">
-        <iconify-icon icon="cuida:upload-outline"></iconify-icon>
-        <div class="inner-container">
-            <div class="description">
-                <p class="instruction">Click to upload</p>
-                <p class="action">or drag and drop</p>
+    <div class="cv-container">
+        <input type="file" id="cv-upload" accept=".csv">
+        
+        <label for="cv-upload" id="cv-drop-zone">
+            <iconify-icon icon="cuida:upload-outline"></iconify-icon>
+            <div class="inner-container">
+                <div class="description">
+                    <p class="instruction">Click to upload</p>
+                    <p class="action">or drag and drop</p>
+                </div>
+                <p class="file-type-info">CSV file from template only</p>
             </div>
-            <p class="file-type-info">CSV file from template only</p>
-        </div>
-    </label>
+        </label>
+    </div>
     <script src="scripts/upload.js"></script>
 </body>
 </html>

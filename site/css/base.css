@@ -1,7 +1,9 @@
 :root {
     /* colors */
     --site-header-color: #3e3e3e;
-    --site-bg-color: #282828;
+    --site-bg-color: #d8d8d8;
+    --primary: #006648;
+    --secondary: #8DC63F;
 }
 
 html {
@@ -18,7 +20,7 @@ body {
 }
 
 header {
-    background-color: var(--site-header-color);
+    background-color: var(--primary);
     box-sizing: border-box;
     height: 36px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
