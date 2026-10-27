@@ -14,6 +14,9 @@ input[type="file"] {
 iconify-icon {
     color: white;
     font-size: 1.6em;
+    margin-bottom: 4px;
+    transition: transform 0.3s ease, 
+                margin-bottom 0.3s ease;
 }
 
 p {
@@ -21,85 +24,101 @@ p {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.cv-container {
-    /* display: inline-block; */
+#cv-drop-zone {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
     width: 80%;
     max-width: 400px;
     height: 140px;
-    margin: 20% auto;
     border-radius: 1rem;
-    /* padding-inline: 1.2rem; */
-    /* padding-block: 1rem; */
-    padding: 1rem 1.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--primary);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-
-    transition: background-color 0.3s ease;
-}
-
-#cv-drop-zone {
-    width: 100%;
-    height: 100%;
-    border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
     cursor: pointer;
-    border-width: 3px;
-    border-style: dashed;
-    border-color: var(--border-color);
-}
+    /* border-width: 3px; */
+    /* border-style: dashed; */
+    background-color: var(--primary);
+    /* border-color: var(--border-color); */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    padding: 15px 18px;
+    transition: background-color 0.3s ease,
+                padding 0.3s ease;
+    
+    .inner-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.5rem;
+        border-width: 3px;
+        border-style: dashed;
+        border-color: var(--border-color);
+        gap: 0.5rem;
+        transition: border-radius 0.3s ease,
+                    gap 0.3s ease;
 
-body:has(#cv-drop-zone:hover) .cv-container {
-    background-color: var(--hover-primary);
+        .description {
+            display: flex;
+            gap: 0.25rem;
+            justify-content: center;
+        }
+        .instruction {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--prompt-text-color);
+        }
+        .action {
+            font-size: 0.875rem;
+            font-weight: normal;
+            color: var(--text-color);
+        }
+        .file-type-info {
+            font-size: 0.75rem;
+            font-weight: normal;
+            color: var(--text-color);
+            text-align: center;
+        }
+        .description,
+        .file-type-info {
+            transition: transform 0.3s ease,
+                        max-height 0.3s ease,
+                        opacity 0.3s ease;
+            
+            max-height: 2rem;
+        }
+    }
+
+    &.dragging {
+        padding: 4px 7px;
+
+        .inner-container {
+            border-style: solid;
+            border-radius: 0.85rem;
+        }
+        .description,
+        .file-type-info {
+            transform: scale(0);
+            max-height: 0;
+            opacity: 0;
+        }
+        iconify-icon {
+            transform: scale(2);
+            margin-bottom: 0;
+        }
+    }
+
+    &.dragging,
+    &:hover {
+        background-color: var(--hover-primary);
+    }
 }
 
 #cv-drop-zone * {
     pointer-events: none;
-}
-
-#cv-drop-zone.dragging {
-  border-style: solid;
-  border-color: var(--border-dragged-color);
-}
-
-body:has(#cv-drop-zone.dragging) .cv-container {
-    padding-inline: 0rem;
-    padding-block: 0rem;
-}
-
-#cv-drop-zone .inner-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-#cv-drop-zone .inner-container .description {
-  display: flex;
-  gap: 0.25rem;
-  justify-content: center;
-}
-
-#cv-drop-zone .inner-container .description .instruction {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--prompt-text-color);
-}
-
-#cv-drop-zone .inner-container .description .action {
-  font-size: 0.875rem;
-  font-weight: normal;
-  color: var(--text-color);
-}
-
-#cv-drop-zone .inner-container .file-type-info {
-  font-size: 0.75rem;
-  font-weight: normal;
-  color: var(--text-color);
-  text-align: center;
 }

@@ -13,20 +13,20 @@
 
 </head>
 <body>
-    <div class="cv-container">
-        <input type="file" id="cv-upload" accept=".csv">
-        
-        <label for="cv-upload" id="cv-drop-zone">
+    <!-- <div class="cv-container"> -->
+    <input type="file" id="cv-upload" accept=".csv">
+    
+    <label for="cv-upload" id="cv-drop-zone">
+        <div class="inner-container">
             <iconify-icon icon="cuida:upload-outline"></iconify-icon>
-            <div class="inner-container">
-                <div class="description">
-                    <p class="instruction">Click to upload</p>
-                    <p class="action">or drag and drop</p>
-                </div>
-                <p class="file-type-info">CSV file from template only</p>
+            <div class="description">
+                <p class="instruction">Click to upload</p>
+                <p class="action">or drag and drop</p>
             </div>
-        </label>
-    </div>
+            <p class="file-type-info">CSV file from template only</p>
+        </div>
+    </label>
+    <!-- </div> -->
     <script src="scripts/upload.js"></script>
 </body>
 </html>
