@@ -1,14 +1,28 @@
-import { parseCompletionGuide } from "./convert.js"
+import { parseCompletionGuide } from "./convert.js";
 
-const dropzoneContainer = document.getElementById("cv-drop-zone")
-const fileInput = document.getElementById("cv-upload")
+const dropzoneContainer = document.getElementById("cv-drop-zone");
+const fileInput = document.getElementById("cv-upload");
 
 fileInput.addEventListener("change", (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file.name.endsWith(".csv")) {
-        convert(file)
+        convert(file);
     }
-})
+});
+
+// stop the cursor from showing the plus icon when file is being dragged over blank space
+window.addEventListener("dragover", (e) => {
+    if (!dropzoneContainer.contains(e.target)) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "none";
+    }
+});
+
+window.addEventListener("drop", (e) => {
+    if (!dropzoneContainer.contains(e.target)) {
+        e.preventDefault();
+    }
+});
 
 dropzoneContainer.addEventListener("dragover", (e) => {
     e.preventDefault()
@@ -18,41 +32,32 @@ dropzoneContainer.addEventListener("dragover", (e) => {
     })
 
     if (isValid) {
-        dropzoneContainer.classList.add("dragging")
+        e.dataTransfer.dropEffect = "copy";
+        dropzoneContainer.classList.add("dragging");
     } else {
-        dropzoneContainer.classList.add("dragging-invalid")
+        e.dataTransfer.dropEffect = "none";
+        dropzoneContainer.classList.add("dragging-invalid");
     }
-})
+});
 
 dropzoneContainer.addEventListener("drop", (e) => {
-    e.preventDefault()
-    dropzoneContainer.classList.remove("dragging")
+    e.preventDefault();
+    dropzoneContainer.classList.remove("dragging");
 
     const file = e.dataTransfer.files[0];
 
     if (file && file.name.endsWith(".csv")) {
-        convert(file)
+        convert(file);
     }
-})
+});
 
 dropzoneContainer.addEventListener("dragleave", (e) => {
-    dropzoneContainer.classList.remove("dragging")
-    dropzoneContainer.classList.remove("dragging-invalid")
-})
+    dropzoneContainer.classList.remove("dragging");
+    dropzoneContainer.classList.remove("dragging-invalid");
+});
 
 async function convert(file) {
-    // console.log(file)
     const jsonData = await parseCompletionGuide(file);
     sessionStorage.setItem("csvData", JSON.stringify(jsonData));
     window.location.href = "guide.html";
-    // const jsonData = 
-    // fetch('/site/sample_data.json')
-    //     .then(response => {
-    //         if (!response.ok) throw new Error('Network response was not ok');
-    //         return response.json();
-    //     })
-    //     .then(jsonData => {
-    //         sessionStorage.setItem("csvData", JSON.stringify(jsonData));
-    //         window.location.href="guide.html";
-    //     });
 }
