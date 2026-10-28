@@ -283,6 +283,22 @@
     justify-content: center;
 }
 
+.fly-in {
+    animation: flyIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation-fill-mode: backwards;
+}
+
+@keyframes flyIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @page {
     size: letter;
     margin: 0in;
