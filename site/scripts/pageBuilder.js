@@ -25,7 +25,7 @@ function buildPage() {
                     if (!semesters[matchedKey]) {
                         semesters[matchedKey] = [];
                     }
-                    for (course of semesterValue["items"]) {
+                    for (course of semesterValue) {
                         semesters[matchedKey].push(course);
                     }
                 }

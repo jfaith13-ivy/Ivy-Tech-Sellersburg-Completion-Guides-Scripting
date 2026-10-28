@@ -1,3 +1,5 @@
+import { parseCompletionGuide } from "./convert.js"
+
 const dropzoneContainer = document.getElementById("cv-drop-zone")
 const fileInput = document.getElementById("cv-upload")
 
@@ -38,16 +40,19 @@ dropzoneContainer.addEventListener("dragleave", (e) => {
     dropzoneContainer.classList.remove("dragging-invalid")
 })
 
-function convert(file) {
-    console.log(file.name)
-
-    fetch('/site/sample_data.json')
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
-        .then(jsonData => {
-            sessionStorage.setItem("csvData", JSON.stringify(jsonData));
-            window.location.href="guide.html";
-        });
+async function convert(file) {
+    // console.log(file)
+    const jsonData = await parseCompletionGuide(file);
+    sessionStorage.setItem("csvData", JSON.stringify(jsonData));
+    window.location.href = "guide.html";
+    // const jsonData = 
+    // fetch('/site/sample_data.json')
+    //     .then(response => {
+    //         if (!response.ok) throw new Error('Network response was not ok');
+    //         return response.json();
+    //     })
+    //     .then(jsonData => {
+    //         sessionStorage.setItem("csvData", JSON.stringify(jsonData));
+    //         window.location.href="guide.html";
+    //     });
 }
