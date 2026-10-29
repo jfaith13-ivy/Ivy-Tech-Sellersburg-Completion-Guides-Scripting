@@ -164,7 +164,7 @@ function buildPage() {
         const badgePaths = {
             "General Education": [genEdPath, "legend-general-badge"],
             "Elective": [electivePath, "legend-elective-badge"],
-            "Pre-Requisite for Program Admission": [requirementPath, "legend-required-badge"],
+            "Pre-Requisite": [requirementPath, "legend-required-badge"],
             "Dual Credit": [dualCreditPath, "legend-dual-credit-badge"]
         };
         
