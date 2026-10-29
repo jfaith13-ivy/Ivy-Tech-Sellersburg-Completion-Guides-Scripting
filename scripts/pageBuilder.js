@@ -20,18 +20,29 @@ const dayMap = {
     "Sunday": "Sun" 
 }
 
+// first item is the path for the badge on the course row
+// second item is the id for showing in the legend
+const badgeMap = {
+    "General Education": [genEdPath, "legend-general-badge"],
+    "Elective": [electivePath, "legend-elective-badge"],
+    "Pre-Requisite": [requirementPath, "legend-required-badge"],
+    "Dual Credit": [dualCreditPath, "legend-dual-credit-badge"]
+};
+
 function buildPage() {
     const content = document.querySelector('.page-content');
     const storedData = sessionStorage.getItem("csvData");
 
     if (storedData) {
         const data = JSON.parse(storedData);
-
+        
         try{
             setName(data.program_name, data.degree_type);
         }
         catch(e) {
         }
+
+        const daysAndTimesListed = data.days_and_times_listed
 
         for (const [yearKey, yearValue] of Object.entries(data)) {
             let semesters = {}; // for grouping (e.g. "Fall 1" and "Fall 2" are grouped into "Fall")
@@ -60,11 +71,11 @@ function buildPage() {
                     // create a td for class_code, course_name, credit_hours, preferred_times, course_length, and add badges from course_type
                     if (course.type == "course") {
                         const row = createTableRow(_currentTable);
-                        
+
                         addTableData(row, buildCheckbox());
                         addTableData(row, buildCourseName(course.class_code, course.course_name));
                         addTableData(row, buildTextSpan(course.credit_hours + " Credits"));
-                        addTableData(row, buildTextSpan(parseDayTime(course.preferred_days, course.preferred_times)));
+                        addTableData(row, buildTextSpan(parseDayTime(course.preferred_days, course.preferred_times)), daysAndTimesListed);
                         addTableData(row, buildTextSpan(course.course_length));
                         addTableData(row, buildBadges(course.course_type));
                     }
@@ -117,9 +128,10 @@ function buildPage() {
         return newRow;
     }
 
-    function addTableData(tableRow, content) {
+    function addTableData(tableRow, content, visible=true) {
         const tableData = document.createElement("td");
         tableData.appendChild(content);
+        tableData.hidden = !visible;
         tableRow.appendChild(tableData);
 
         return tableData;
@@ -169,15 +181,6 @@ function buildPage() {
     }
 
     function buildBadges(courseType) {
-        // first item is the path for the badge on the course row
-        // second item is the id for showing in the legend
-        const badgePaths = {
-            "General Education": [genEdPath, "legend-general-badge"],
-            "Elective": [electivePath, "legend-elective-badge"],
-            "Pre-Requisite": [requirementPath, "legend-required-badge"],
-            "Dual Credit": [dualCreditPath, "legend-dual-credit-badge"]
-        };
-        
         const badges = document.createElement("div");
         badges.classList.add("badges");
         
@@ -187,12 +190,12 @@ function buildPage() {
         // but I will change the converter to output an array instead.
         // currently using a sample where I manually swapped the strings to arrays.
         for (const type of courseType) {
-            if (Object.hasOwn(badgePaths, type)) {
-                const badge = createBadge(badgePaths[type][0]);
+            if (Object.hasOwn(badgeMap, type)) {
+                const badge = createBadge(badgeMap[type][0]);
                 badges.appendChild(badge);
 
                 // show legend badge
-                const legend = document.getElementById(badgePaths[type][1])
+                const legend = document.getElementById(badgeMap[type][1])
                 legend.style.display = "flex";
 
                 // show legend bar
