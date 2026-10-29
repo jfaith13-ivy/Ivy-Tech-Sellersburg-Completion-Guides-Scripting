@@ -216,33 +216,18 @@ export async function parseCompletionGuide(csvInput) {
         }
 
         // detect certification section
-        if (currentYear && currentTerm && values.includes("Certifications")) {
-            let certRowIdx = rowIndex + 1
+        if (currentYear && currentTerm) {
+            for (let i = 0; i < values.length; i++) {
+                if (values[i] === "Certifications") {
+                    const certName = values[i + 2];
 
-            while (certRowIdx < rows.length) {
-                const certRow = rows[certRowIdx].map(clean);
-                const rowText = certRow.join(" ");
-
-                // stop at next year
-                if (/Year\s+\d+/.test(rowText)) {
-                    break;
-                }
-
-                // stop at next term
-                if (certRow.some((cell) => terms.has(cell))) {
-                    break;
-                }
-
-                for (const cell of certRow) {
-                    if (cell && cell !== "Certifications:") {
+                    if (certName) {
                         result[currentYear][currentTerm].push({
-                            "type": "certification",
-                            "name": cell
+                            type: "certification",
+                            name: certName
                         });
                     }
                 }
-
-                certRowIdx += 1;
             }
         }
 
