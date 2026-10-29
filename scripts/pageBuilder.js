@@ -10,6 +10,16 @@ const groupedSemesters = {
     "Summer": ["Summer"]
 }
 
+const dayMap = {
+    "Monday": "Mon",
+    "Tuesday": "Tues",
+    "Wednesday": "Wed",
+    "Thursday": "Thu",
+    "Friday": "Fri",
+    "Saturday": "Sat", // Saturday and Sunday will likely be completely unused(?), but still including for consistency
+    "Sunday": "Sun" 
+}
+
 function buildPage() {
     const content = document.querySelector('.page-content');
     const storedData = sessionStorage.getItem("csvData");
@@ -54,7 +64,7 @@ function buildPage() {
                         addTableData(row, buildCheckbox());
                         addTableData(row, buildCourseName(course.class_code, course.course_name));
                         addTableData(row, buildTextSpan(course.credit_hours + " Credits"));
-                        addTableData(row, buildTextSpan(course.preferred_times));
+                        addTableData(row, buildTextSpan(parseDayTime(course.preferred_days, course.preferred_times)));
                         addTableData(row, buildTextSpan(course.course_length));
                         addTableData(row, buildBadges(course.course_type));
                     }
@@ -236,6 +246,33 @@ function buildPage() {
         if (titleContainer.offsetHeight > 50) {
             titleContainer.classList.add("small-name");
         }
+    }
+
+    function parseDayTime(course_days, course_times) {
+        let daysString = ""
+        let timesString = ""
+
+        if (course_days) {
+            let shortDayNames = []
+            for (const day of course_days) {
+                if (day in dayMap) {
+                    shortDayNames.push(dayMap[day])
+                }
+            }
+
+            for (const [index, word] of shortDayNames.entries()) {
+                daysString += word
+                if (index !== shortDayNames.length - 1){
+                    daysString += "/"
+                }
+            }
+        }
+
+        if (course_times) {
+            timesString = course_times
+        }
+
+        return daysString + " " + timesString
     }
 }
 

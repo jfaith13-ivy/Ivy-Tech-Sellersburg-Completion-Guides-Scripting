@@ -185,7 +185,8 @@ export async function parseCompletionGuide(csvInput) {
                             if (
                                 key === "modalities_offered" ||
                                 key === "offered_another_semester" ||
-                                key === "course_type"
+                                key === "course_type" ||
+                                key === "preferred_days"
                             ) {
                                 course[key] = value
                                     .split(",")
