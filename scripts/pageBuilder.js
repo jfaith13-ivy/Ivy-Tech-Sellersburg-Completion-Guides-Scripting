@@ -2,6 +2,7 @@ const checkboxPath = "assets/svgs/checkbox-empty.svg";
 const electivePath = "assets/svgs/Elective.svg";
 const genEdPath = "assets/svgs/Gen_ed.svg";
 const requirementPath = "assets/svgs/Requirement.svg";
+const dualCreditPath = "assets/svgs/DC.svg";
 
 const groupedSemesters = {
     "Fall": ["Fall 1", "Fall 2"],
@@ -15,6 +16,12 @@ function buildPage() {
 
     if (storedData) {
         const data = JSON.parse(storedData);
+
+        try{
+            setName(data.program_name, data.degree_type);
+        }
+        catch(e) {
+        }
 
         for (const [yearKey, yearValue] of Object.entries(data)) {
             let semesters = {}; // for grouping (e.g. "Fall 1" and "Fall 2" are grouped into "Fall")
@@ -152,10 +159,13 @@ function buildPage() {
     }
 
     function buildBadges(courseType) {
+        // first item is the path for the badge on the course row
+        // second item is the id for showing in the legend
         const badgePaths = {
-            "General Education": genEdPath,
-            "Elective": electivePath,
-            "Pre-Requisite for Program Admission": requirementPath
+            "General Education": [genEdPath, "legend-general-badge"],
+            "Elective": [electivePath, "legend-elective-badge"],
+            "Pre-Requisite for Program Admission": [requirementPath, "legend-required-badge"],
+            "Dual Credit": [dualCreditPath, "legend-dual-credit-badge"]
         };
         
         const badges = document.createElement("div");
@@ -168,8 +178,16 @@ function buildPage() {
         // currently using a sample where I manually swapped the strings to arrays.
         for (const type of courseType) {
             if (Object.hasOwn(badgePaths, type)) {
-                const badge = createBadge(badgePaths[type]);
+                const badge = createBadge(badgePaths[type][0]);
                 badges.appendChild(badge);
+
+                // show legend badge
+                const legend = document.getElementById(badgePaths[type][1])
+                legend.style.display = "flex";
+
+                // show legend bar
+                const legendBar = document.getElementById("icon-legend-bar")
+                legendBar.style.display = "flex";
             }
         }
 

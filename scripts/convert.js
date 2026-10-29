@@ -18,7 +18,14 @@ const field_map = {
     "Offered Another Semester:": "offered_another_semester",
     "Type of Course": "course_type",
     "Course Modalities Offered:": "modalities_offered",
-    "Notes:": "notes"
+    "Notes:": "notes",
+}
+
+const root_field_map = {
+    "Program Name": "program_name",
+    "Degree Type": "degree_type",
+    "Days and Times Listed?": "days_and_times_listed",
+    "Is the program Limited Enrollment?": "limited_enrollment"
 }
 
 function clean(value) {
@@ -91,6 +98,27 @@ export async function parseCompletionGuide(csvInput) {
         const row = rows[rowIndex];
         const values = row.map(clean);
         
+        // detect root fields (such as program name, program type, etc.)
+        for (let i = 0; i < values.length; i++) {
+            const label = values[i];
+
+            if (label in root_field_map) {
+                const key = root_field_map[label];
+                const val = values[i + 2];
+
+                if (val) {
+                    if (
+                        key === "days_and_times_listed" ||
+                        key === "limited_enrollment"
+                    ) {
+                        result[key] = val.toLowerCase() === "yes"; // turns the Yes/No into a boolean
+                    } else {
+                        result[key] = val;
+                    }
+                }
+            }
+        }
+
         // detect year
         for (const cell of values) {
             if (/^Year\s+\d+$/.test(cell)) {
