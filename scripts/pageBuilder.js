@@ -250,7 +250,6 @@ function buildPage() {
         const titleFirstWords = document.getElementById("title-first-words");
         const titleLastWord = document.getElementById("title-last-word");
         const titleDegreeType = document.getElementById("degree-type");
-        const pageTitle = document.getElementById("page-title");
 
         const words = degreeName.split(/\s+/); // split at spaces
         if (words.length > 1) {
