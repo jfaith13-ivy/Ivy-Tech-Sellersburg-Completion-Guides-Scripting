@@ -40,7 +40,7 @@ function buildPage() {
             setName(data.program_name, data.degree_type);
         }
         catch(e) {
-            setErrorAlert(e.message);
+            sendInputErrorAlert(e.message);
         }
 
         const daysAndTimesListed = data.days_and_times_listed
@@ -116,6 +116,7 @@ function buildPage() {
         // scale the page down to fit
         scaleToFit();
     } else {
+        alert("Degree data is missing");
         window.location.href = "./";
     }
 
@@ -324,6 +325,6 @@ function scaleToFit() {
     }
 }
 
-function setErrorAlert(message) {
+function sendInputErrorAlert(message) {
     alert("Input Error: " + message + ", result will be incomplete.");
 }
