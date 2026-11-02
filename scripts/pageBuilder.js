@@ -40,6 +40,7 @@ function buildPage() {
             setName(data.program_name, data.degree_type);
         }
         catch(e) {
+            setErrorAlert(e.message);
         }
 
         const daysAndTimesListed = data.days_and_times_listed
@@ -238,6 +239,13 @@ function buildPage() {
     }
 
     function setName(degreeName, degreeType) {
+        if (!degreeName) {
+            throw new Error("Degree name is missing");
+        }
+        if (!degreeType) {
+            throw new Error("Degree type is missing");
+        }
+    
         const titleContainer = document.getElementById("title-container");
         const titleFirstWords = document.getElementById("title-first-words");
         const titleLastWord = document.getElementById("title-last-word");
@@ -315,4 +323,8 @@ function scaleToFit() {
         const scaleRatio = availableHeight / contentHeight;
         content.style.zoom = scaleRatio;
     }
+}
+
+function setErrorAlert(message) {
+    alert("Input Error: " + message + ", result will be incomplete.");
 }
