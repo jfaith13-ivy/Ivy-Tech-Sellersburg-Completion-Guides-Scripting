@@ -43,6 +43,7 @@ function buildPage() {
         }
 
         const daysAndTimesListed = data.days_and_times_listed
+        let maxBadgeLength = 0;
 
         for (const [yearKey, yearValue] of Object.entries(data)) {
             let semesters = {}; // for grouping (e.g. "Fall 1" and "Fall 2" are grouped into "Fall")
@@ -77,7 +78,11 @@ function buildPage() {
                         addTableData(row, buildTextSpan(course.credit_hours + " Credits"));
                         addTableData(row, buildTextSpan(parseDayTime(course.preferred_days, course.preferred_times)), daysAndTimesListed);
                         addTableData(row, buildTextSpan(course.course_length));
-                        addTableData(row, buildBadges(course.course_type));
+                        const badges = buildBadges(course.course_type);
+                        addTableData(row, badges);
+                        if (badges.children.length > maxBadgeLength) {
+                            maxBadgeLength = badges.children.length;
+                        }
                     }
                     
                     if (course.type == "certification") {
@@ -85,6 +90,22 @@ function buildPage() {
                     }
                 }
             }
+        }
+
+        // make the badges column width fit to the amount of badges that are added
+        let badgesWidth;
+        if (maxBadgeLength > 0) {
+            badgesWidth = ((maxBadgeLength * 16) + (4 * (maxBadgeLength - 1))) + "px";
+        } else {
+            badgesWidth = "0px";
+        }
+        document.documentElement.style.setProperty("--badgesColumnWidth", badgesWidth);
+
+        // make the course name column bigger if dates and times aren't shown
+        if (daysAndTimesListed) {
+            document.documentElement.style.setProperty("--courseNameColumnWidth", "50%");
+        } else {
+            document.documentElement.style.setProperty("--courseNameColumnWidth", "85%");
         }
 
         // move the footer to the bottom
