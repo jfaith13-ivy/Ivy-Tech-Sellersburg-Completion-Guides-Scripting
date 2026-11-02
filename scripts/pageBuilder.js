@@ -116,7 +116,7 @@ function buildPage() {
         // scale the page down to fit
         scaleToFit();
     } else {
-        window.location.href = "/";
+        window.location.href = "./";
     }
 
     function createSemesterBlock(name) {
