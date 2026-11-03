@@ -141,6 +141,7 @@
             .course-name {
                 display: block;
                 transform-origin: top left;
+                text-wrap: balance;
             }
             .small-name {
                 h1,

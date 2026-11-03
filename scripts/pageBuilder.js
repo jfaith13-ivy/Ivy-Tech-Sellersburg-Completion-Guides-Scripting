@@ -285,6 +285,24 @@ function buildPage() {
 
         if (titleContainer.offsetHeight > 50) {
             titleContainer.classList.add("small-name");
+
+            // binary search to shrink the container width so it stays centered
+            let min = 0;
+            let max = titleContainer.offsetWidth;
+            const initialHeight = titleContainer.offsetHeight;
+            let bestWidth = max;
+
+            while (min <= max) {
+                let mid = Math.floor((min + max) / 2);
+                titleContainer.style.width = mid + "px";
+                if (titleContainer.offsetHeight > initialHeight) {
+                    min = mid + 1; // too narrow, caused another line wrap
+                } else {
+                    bestWidth = mid; // fits, try even narrower
+                    max = mid - 1;
+                }
+            }
+            titleContainer.style.width = bestWidth + "px";
         }
     }
 
