@@ -31,8 +31,9 @@ const badgeMap = {
 
 function buildPage() {
     const content = document.querySelector('.page-content');
+    const page = document.querySelector('.page');
     const storedData = sessionStorage.getItem("csvData");
-
+    
     if (storedData) {
         const data = JSON.parse(storedData);
         
@@ -94,6 +95,7 @@ function buildPage() {
         }
 
         // make the badges column width fit to the amount of badges that are added
+        // 16 is the width of each badge in pixels, and 4 is the gap size between each badge
         let badgesWidth;
         if (maxBadgeLength > 0) {
             badgesWidth = ((maxBadgeLength * 16) + (4 * (maxBadgeLength - 1))) + "px";
@@ -115,6 +117,12 @@ function buildPage() {
 
         // scale the page down to fit
         scaleToFit();
+
+        // animate in
+        requestAnimationFrame(() => {
+            page.classList.add("fly-in");
+        });
+    
     } else {
         alert("Degree data is missing");
         window.location.href = "./";
@@ -309,7 +317,6 @@ function buildPage() {
 }
 
 function scaleToFit() {
-    const page = document.querySelector('.page');
     const content = document.querySelector('.page-content');
     const header = document.querySelector('.page-header');
 
