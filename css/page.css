@@ -3,6 +3,7 @@
     --paper-color: white;
     --header-text-color: white;
     --requirement: #EC6A5A;
+    --limited-enrollment: #EC6A5A;
     --elective: #FAA21B;
     --fall-only: #D15D27;
     --dual-credit: #253959;
@@ -128,15 +129,30 @@
                 color: var(--secondary);
                 margin: -5px 0;
                 font-size: 12pt;
+
+                #programTrack,
+                #programStart {
+                    color: var(--header-text-color);
+                }
+            }
+            .small-rounded-line,
+            .rounded-line {
+                border-radius: 99px;
+                display: inline-block;
+                vertical-align: middle;
             }
             .rounded-line {
                 width: 4px;
                 height: 28px;
-                background-color: var(--header-text-color);
-                border-radius: 99px;
                 margin: 0 2px 6px 2px;
-                display: inline-block;
-                vertical-align: middle;
+                background-color: var(--header-text-color);
+            }
+            .small-rounded-line {
+                width: 2px;
+                height: 14px;
+                padding: 0px 0.25px;
+                transform: translateY(-1px); /* nudge slightly up */
+                background-color: var(--secondary);
             }
             .course-name {
                 display: block;
@@ -275,6 +291,8 @@
     align-items: center;
     color: var(--footer);
     font-style: italic;
+    white-space: nowrap;
+    gap: 4px;
     margin-top: 2px;
 }
 
@@ -298,6 +316,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.limited-enrollment-box {
+    background-color: var(--limited-enrollment);
+    color: var(--header-text-color);
+    padding: 7px;
+    text-align: center;
+    font-family: "Avenir", sans-serif;
+    font-weight: 900;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
 }
 
 .fly-in {

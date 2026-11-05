@@ -24,8 +24,10 @@ const field_map = {
 const root_field_map = {
     "Program Name": "program_name",
     "Degree Type": "degree_type",
+    "Program Start": "program_start",
+    "Program Track": "different_start_or_program_track",
     "Days and Times Listed?": "days_and_times_listed",
-    "Is the program Limited Enrollment?": "limited_enrollment"
+    "Years Valid": "years_valid"
 }
 
 function clean(value) {
@@ -108,10 +110,9 @@ export async function parseCompletionGuide(csvInput) {
 
                 if (val) {
                     if (
-                        key === "days_and_times_listed" ||
-                        key === "limited_enrollment"
+                        key === "days_and_times_listed"
                     ) {
-                        result[key] = val.toLowerCase() === "yes"; // turns the Yes/No into a boolean
+                        result[key] = val.toLowerCase() === "true"; // turns the checkbox into a boolean
                     } else {
                         result[key] = val;
                     }
@@ -226,6 +227,24 @@ export async function parseCompletionGuide(csvInput) {
                         result[currentYear][currentTerm].push({
                             type: "certification",
                             name: certName
+                        });
+                    }
+                }
+            }
+        }
+
+        // detect limited enrollment header
+        if (currentYear && currentTerm) {
+            for (let i = 0; i < values.length; i++) {
+                if (values[i] === "Limited Enrollment Threshold") {
+                    const limitedEnrollment = values[i + 2].toLowerCase() === "true"; // turns the checkbox into a boolean
+
+                    // only add if it is true, so that it doesn't increase the size of the semester object, 
+                    // which is used to determine if the semester has any content
+                    if (limitedEnrollment === true) {
+                        result[currentYear][currentTerm].push({
+                            type: "limited_enrollment",
+                            enabled: limitedEnrollment
                         });
                     }
                 }

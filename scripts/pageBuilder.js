@@ -20,6 +20,11 @@ const dayMap = {
     "Sunday": "Sun" 
 }
 
+const programStartMap = {
+    "Spring": "Spring Start",
+    "Fall": "Fall Start"
+}
+
 // first item is the path for the badge on the course row
 // second item is the id for showing in the legend
 const badgeMap = {
@@ -37,14 +42,20 @@ function buildPage() {
     if (storedData) {
         const data = JSON.parse(storedData);
         
-        try{
+        try {
             setName(data.program_name, data.degree_type);
-        }
-        catch(e) {
+        } catch(e) {
             sendInputErrorAlert(e.message);
         }
 
+        setProgramStart(data.program_start);
+        setProgramTrack(data.different_start_or_program_track);
+        setYearsValid(data.years_valid);
+
         const daysAndTimesListed = data.days_and_times_listed
+        if (!daysAndTimesListed === null) {
+            sendInputErrorAlert('"Days and Times Listed?" is missing');
+        }
         let maxBadgeLength = 0;
 
         for (const [yearKey, yearValue] of Object.entries(data)) {
@@ -67,7 +78,7 @@ function buildPage() {
                     continue;
                 }
                 const _currentTable = createSemesterBlock(semesterKey);
-                const _degreeContainer = createDegreeContainer() ;
+                const _certContainer = createCertContainer() ;
                 
                 // each semester should hold an array of courses
                 for (const [, course] of Object.entries(semesterValue)) {
@@ -88,7 +99,13 @@ function buildPage() {
                     }
                     
                     if (course.type == "certification") {
-                        buildCertBlock(_degreeContainer, course.name);
+                        buildCertBlock(_certContainer, course.name);
+                    }
+
+                    if (course.type == "limited_enrollment") {
+                        if (course.enabled == true) {
+                            buildLimitedEnrollmentBlock();
+                        }
                     }
                 }
             }
@@ -144,7 +161,7 @@ function buildPage() {
         return blockTable;
     }
 
-    function createDegreeContainer() {
+    function createCertContainer() {
         const degrees = document.createElement("div");
         degrees.classList.add("degree-boxes");
         content.appendChild(degrees);
@@ -201,7 +218,13 @@ function buildPage() {
         block.textContent = name;
         block.classList.add("degree-box");
         certContainer.appendChild(block);
+    }
 
+    function buildLimitedEnrollmentBlock() {
+        const block = document.createElement("div");
+        block.textContent = "Limited Enrollment";
+        block.classList.add("limited-enrollment-box");
+        content.appendChild(block);
     }
 
     function buildTextSpan(text) {
@@ -303,6 +326,32 @@ function buildPage() {
                 }
             }
             titleContainer.style.width = bestWidth + "px";
+        }
+    }
+
+    function setProgramStart(programStart) {
+        if (programStart !== null && programStart !== "" && programStart !== undefined) {
+            if (programStart in programStartMap) {
+                document.getElementById("programStartName").textContent = programStartMap[programStart];
+                return;
+            }
+        }
+        document.getElementById("programStart").style.display = "none";
+    }
+
+    function setProgramTrack(programTrack) {
+        if (programTrack !== null && programTrack !== "" && programTrack !== undefined) {
+            document.getElementById("programTrackName").textContent = programTrack;
+        } else {
+            document.getElementById("programTrack").style.display = "none";
+        }
+    }
+
+    function setYearsValid(yearsValid) {
+        if (yearsValid !== null && yearsValid !== "" && yearsValid !== undefined) {
+            document.getElementById("years-valid-disclaimer").textContent = "(" + yearsValid + ")";
+        } else {
+            document.getElementById("years-valid-disclaimer").style.display = "none";
         }
     }
 
