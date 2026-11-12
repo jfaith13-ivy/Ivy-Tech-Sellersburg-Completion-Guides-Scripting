@@ -222,7 +222,7 @@ function buildPage() {
 
     function buildLimitedEnrollmentBlock() {
         const block = document.createElement("div");
-        block.textContent = "Limited Enrollment";
+        block.textContent = "The above courses should be completed prior to registering for programmatic courses";
         block.classList.add("limited-enrollment-box");
         content.appendChild(block);
     }
