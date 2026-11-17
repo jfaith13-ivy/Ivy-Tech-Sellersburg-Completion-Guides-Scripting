@@ -307,7 +307,7 @@ function buildPage() {
         document.title = titleCaseName + " - " + degreeType;
 
         if (titleContainer.offsetHeight > 50) {
-            titleContainer.classList.add("small-name");
+            // titleContainer.classList.add("small-name");
 
             // binary search to shrink the container width so it stays centered
             let min = 0;
